@@ -3,71 +3,130 @@
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accessibility Statement - All Things Abound</title>
-  <meta name="description" content="All Things Abound is committed to digital accessibility for people with disabilities. WCAG 2.1 Level AA compliance." />
-  undefinedundefined
+  <meta name="description" content="All Things Abound is committed to digital accessibility. WCAG 2.1 Level AA compliance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--midnight:#1E1B4B;--sapphire:#312E81;--violet:#7C3AED;--lavender:#C4B5FD;--periwinkle:#C7D2FE;--white:#FFFFFF}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--midnight);color:var(--white);line-height:1.7}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 5%;background:rgba(30,27,75,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(124,58,237,.18)}
+    .nlw{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+    .nli{height:42px;width:auto;mix-blend-mode:screen;filter:brightness(1.2)}
+    .nlt{font-family:'Fraunces',serif;font-size:1rem;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--white)}
+    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+    .nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--lavender);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--white)}
+    .nc{background:var(--violet);color:var(--white)!important;padding:.5rem 1.3rem;border-radius:50px}
+    .nt{display:none;background:none;border:none;color:var(--lavender);font-size:1.4rem;cursor:pointer;padding:.25rem}
+    .ph{padding:9rem 5% 4rem;text-align:center;background:radial-gradient(ellipse at 60% 40%,rgba(124,58,237,.22) 0%,transparent 60%),var(--midnight);border-bottom:1px solid rgba(124,58,237,.15)}
+    .ph .lb{display:block;font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--violet);margin-bottom:1rem}
+    .ph h1{font-family:'Fraunces',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:300;color:var(--white);line-height:1.2}
+    .ph h1 em{color:var(--lavender);font-style:italic}
+    .ph p{margin-top:1rem;font-size:1.05rem;font-weight:300;color:var(--periwinkle);max-width:580px;margin-left:auto;margin-right:auto}
+    .sec{padding:6rem 5%}
+    .inr{max-width:740px;margin:0 auto}
+    .prose h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:400;color:var(--white);margin:2.5rem 0 .8rem}
+    .prose p{font-size:.97rem;font-weight:300;color:var(--periwinkle);line-height:1.85;margin-bottom:1rem}
+    .prose ul{padding-left:1.4rem;margin-bottom:1rem}
+    .prose li{font-size:.97rem;font-weight:300;color:var(--periwinkle);line-height:1.8;margin-bottom:.4rem}
+    .prose a{color:var(--lavender)}
+    .lu{font-size:.82rem;color:rgba(196,181,253,.5);margin-bottom:2.5rem;display:block}
+    .cb{background:var(--violet);text-align:center;padding:5.5rem 5%}
+    .cb h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;color:var(--white);max-width:600px;margin:0 auto 1rem;line-height:1.25}
+    .cb h2 em{font-style:italic;color:rgba(255,255,255,.85)}
+    .cb p{font-size:1rem;font-weight:300;color:rgba(255,255,255,.8);max-width:480px;margin:0 auto 2.2rem}
+    .bw{display:inline-block;background:var(--white);color:var(--violet);font-family:'Inter',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.05em;padding:1rem 2.6rem;border-radius:50px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .bw:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
+    footer{background:#0d0b28;padding:4rem 5% 2rem;border-top:1px solid rgba(124,58,237,.18)}
+    .ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+    .fl{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+    .fl img{height:34px;width:auto;mix-blend-mode:screen;filter:brightness(1.2)}
+    .fb{font-family:'Fraunces',serif;font-size:.95rem;font-weight:300;letter-spacing:.16em;text-transform:uppercase;color:var(--lavender)}
+    .fv{font-size:.75rem;color:rgba(196,181,253,.35);letter-spacing:.14em}
+    .fch{font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--violet);margin-bottom:1rem}
+    .fn ul{list-style:none}
+    .fn li{margin-bottom:.6rem}
+    .fn a{font-size:.87rem;color:rgba(196,181,253,.55);text-decoration:none;transition:color .2s;font-weight:300}
+    .fn a:hover{color:var(--lavender)}
+    .fb2{border-top:1px solid rgba(124,58,237,.12);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .fb2 p{font-size:.8rem;color:rgba(196,181,253,.35)}
+    .fll{display:flex;gap:1.5rem}
+    .fll a{font-size:.8rem;color:rgba(196,181,253,.35);text-decoration:none;transition:color .2s}
+    .fll a:hover{color:var(--lavender)}
+    .fu{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .fu.vis{opacity:1;transform:translateY(0)}
+    @media(max-width:900px){.ft{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(30,27,75,.98);padding:1.5rem 5%;gap:1.2rem;border-bottom:1px solid rgba(124,58,237,.2)}.nav-links.open{display:flex}.nt{display:block}.ft{grid-template-columns:1fr;gap:2rem}.fb2{flex-direction:column;text-align:center}}
+  </style>
 </head>
 <body>
-undefined
-<main id="main-content">
-  <header class="page-header">
-    <span class="lbl">Accessibility</span>
-    <h1>Accessibility <em>Statement</em></h1>
-    <p>All Things Abound is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience for everyone.</p>
-  </header>
-  <section class="sec">
-    <div class="inner-n prose fu">
-      <span class="lu">Last Updated: June 11, 2026</span>
-      <h2>Our Commitment</h2>
-      <p>All Things Abound is committed to making our website accessible to the widest possible audience, regardless of technology or ability. We strive to meet or exceed the requirements of the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA, as published by the World Wide Web Consortium (W3C).</p>
-      <h2>Conformance Status</h2>
-      <p>We are working toward full conformance with WCAG 2.1 Level AA. Our current website incorporates:</p>
-      <ul>
-        <li><strong>Semantic HTML5:</strong> Proper headings, landmarks, and lists for meaningful structure</li>
-        <li><strong>ARIA Labels:</strong> Navigation, sections, and interactive elements include appropriate roles and labels</li>
-        <li><strong>Keyboard Navigation:</strong> All interactive elements are accessible without a mouse</li>
-        <li><strong>Color Contrast:</strong> Minimum 4.5:1 ratio for normal text, 3:1 for large text</li>
-        <li><strong>Alt Text:</strong> All meaningful images include descriptive alternative text</li>
-        <li><strong>Responsive Design:</strong> Functional across different screen sizes and orientations</li>
-        <li><strong>Focus Indicators:</strong> Visible focus indicators for keyboard users</li>
-        <li><strong>Text Resizing:</strong> Content remains readable and functional at up to 200% zoom</li>
-        <li><strong>No Autoplay:</strong> We do not use audio or video that plays automatically</li>
-      </ul>
-      <h2>ADA Compliance</h2>
-      <p>We are committed to compliance with:</p>
-      <ul>
-        <li>Title III of the Americans with Disabilities Act (ADA)</li>
-        <li>Section 508 of the Rehabilitation Act</li>
-        <li>WCAG 2.1 Guidelines (Level AA)</li>
-      </ul>
-      <h2>Assistive Technology Support</h2>
-      <p>Our website is designed to be compatible with:</p>
-      <ul>
-        <li><strong>Screen Readers:</strong> JAWS, NVDA, VoiceOver (macOS/iOS), TalkBack (Android)</li>
-        <li><strong>Voice Recognition:</strong> Dragon NaturallySpeaking and similar tools</li>
-        <li><strong>Screen Magnification:</strong> ZoomText and built-in browser/OS zoom features</li>
-        <li><strong>High Contrast Mode:</strong> Compatible with Windows High Contrast mode</li>
-      </ul>
-      <h2>Known Limitations</h2>
-      <p>While we strive for full accessibility, some areas may not yet fully meet WCAG 2.1 Level AA. We are actively working to identify and address these, including enhanced contrast in some decorative elements and additional keyboard shortcut documentation.</p>
-      <h2>Feedback &amp; Contact</h2>
-      <p>We welcome feedback on the accessibility of our site. If you experience barriers, please contact us:</p>
-      <ul>
-        <li><strong>Email:</strong> <a href="mailto:hello@allthingsabound.com">hello@allthingsabound.com</a></li>
-        <li><strong>Response Time:</strong> We aim to respond within 5 business days</li>
-      </ul>
-      <p>When contacting us, please include: a description of the barrier, the URL where it occurred, the assistive technology you were using, and your browser/OS.</p>
-      <h2>Formal Complaints</h2>
-      <p>If you wish to file a formal accessibility complaint, contact us in writing at <a href="mailto:hello@allthingsabound.com">hello@allthingsabound.com</a>. We will acknowledge receipt within 5 business days and aim to resolve within 30 calendar days.</p>
-      <h2>Ongoing Efforts</h2>
-      <p>We are committed to conducting regular accessibility audits, training our team on accessibility best practices, including accessibility requirements in our design process, and engaging with users who have disabilities to learn from their experiences. This statement will be reviewed and updated at least annually.</p>
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nlw" aria-label="All Things Abound home"><img src="logo.png" alt="All Things Abound" class="nli" /><span class="nlt">All Things Abound</span></a>
+    <button class="nt" id="nt" aria-controls="nm" aria-expanded="false" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links" id="nm" role="list">
+      <li><a href="mission.html">Mission</a></li><li><a href="story.html">Our Story</a></li><li><a href="values.html">Values</a></li><li><a href="tools.html">Tools</a></li><li><a href="tools.html#contact" class="nc">Get Started</a></li>
+    </ul>
+  </nav>
+  <main id="main-content">
+    <header class="ph">
+      <span class="lb">Accessibility</span>
+      <h1>Accessibility <em>Statement</em></h1>
+      <p>All Things Abound is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience for everyone.</p>
+    </header>
+    <section class="sec">
+      <div class="inr prose fu">
+        <span class="lu">Last Updated: June 11, 2026</span>
+        <h2>Our Commitment</h2>
+        <p>All Things Abound is committed to making our website accessible to the widest possible audience, regardless of technology or ability. We strive to meet or exceed the requirements of the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA, as published by the World Wide Web Consortium (W3C).</p>
+        <h2>Conformance Status</h2>
+        <p>We are working toward full conformance with WCAG 2.1 Level AA. Our current website incorporates:</p>
+        <ul>
+          <li><strong>Semantic HTML5:</strong> Proper headings, landmarks, and lists for meaningful structure</li>
+          <li><strong>ARIA Labels:</strong> Navigation, sections, and interactive elements include appropriate roles and labels</li>
+          <li><strong>Keyboard Navigation:</strong> All interactive elements are accessible without a mouse</li>
+          <li><strong>Color Contrast:</strong> Minimum 4.5:1 ratio for normal text, 3:1 for large text</li>
+          <li><strong>Alt Text:</strong> All meaningful images include descriptive alternative text</li>
+          <li><strong>Responsive Design:</strong> Functional across different screen sizes and orientations</li>
+          <li><strong>Focus Indicators:</strong> Visible focus indicators for keyboard users</li>
+          <li><strong>Text Resizing:</strong> Content remains readable and functional at up to 200% zoom</li>
+          <li><strong>No Autoplay:</strong> We do not use audio or video that plays automatically</li>
+        </ul>
+        <h2>ADA Compliance</h2>
+        <p>We are committed to compliance with: Title III of the Americans with Disabilities Act (ADA), Section 508 of the Rehabilitation Act, and WCAG 2.1 Guidelines (Level AA).</p>
+        <h2>Assistive Technology Support</h2>
+        <p>Our website is designed to be compatible with screen readers (JAWS, NVDA, VoiceOver, TalkBack), voice recognition software (Dragon NaturallySpeaking), screen magnification tools, keyboard-only navigation, and Windows High Contrast mode.</p>
+        <h2>Known Limitations</h2>
+        <p>While we strive for full accessibility, some areas may not yet fully meet WCAG 2.1 Level AA. We are actively working to improve color contrast in some decorative elements and expand keyboard shortcut documentation.</p>
+        <h2>Feedback &amp; Contact</h2>
+        <p>We welcome feedback on the accessibility of our site. Contact us at: <a href="mailto:hello@allthingsabound.com">hello@allthingsabound.com</a>. We aim to respond within 5 business days. Please include: a description of the barrier, the URL, the assistive technology used, and your browser/OS.</p>
+        <h2>Formal Complaints</h2>
+        <p>File formal complaints in writing at <a href="mailto:hello@allthingsabound.com">hello@allthingsabound.com</a>. We acknowledge within 5 business days and aim to resolve within 30 calendar days.</p>
+        <h2>Ongoing Efforts</h2>
+        <p>We conduct regular accessibility audits, train our team on best practices, include accessibility requirements in our design process, and engage with users with disabilities to learn from their experiences. This statement is reviewed and updated at least annually.</p>
+      </div>
+    </section>
+    <div class="cb">
+      <h2>Need accessibility <em>assistance?</em></h2>
+      <p>We&rsquo;re here to help. Reach out and we&rsquo;ll accommodate your needs.</p>
+      <a href="mailto:hello@allthingsabound.com" class="bw">Contact Us</a>
     </div>
-  </section>
-  <div class="cta-band">
-    <h2>Need accessibility <em>assistance?</em></h2>
-    <p>We&rsquo;re here to help. Reach out and we&rsquo;ll do our best to accommodate your needs.</p>
-    <a href="mailto:hello@allthingsabound.com" class="btn-w">Contact Us</a>
-  </div>
-</main>
-undefined
+  </main>
+  <footer role="contentinfo">
+    <div class="ft">
+      <div><div class="fl"><img src="logo.png" alt="All Things Abound" /><span class="fb">All Things Abound</span></div><p style="font-family:'Fraunces',serif;font-size:.9rem;font-style:italic;color:rgba(196,181,253,.6);font-weight:300;margin-bottom:.3rem;">Abound in every good work.</p><p class="fv">2 Corinthians 9:8</p></div>
+      <div class="fn"><p class="fch">Pages</p><ul><li><a href="mission.html">Mission</a></li><li><a href="story.html">Our Story</a></li><li><a href="values.html">Values</a></li><li><a href="tools.html">Tools</a></li></ul></div>
+      <div class="fn"><p class="fch">Legal</p><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="accessibility.html">Accessibility</a></li></ul></div>
+      <div class="fn"><p class="fch">Connect</p><ul><li><a href="mailto:hello@allthingsabound.com">Email Us</a></li></ul></div>
+    </div>
+    <div class="fb2"><p>&copy; <span id="yr"></span> All Things Abound. All rights reserved.</p><div class="fll"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="accessibility.html">Accessibility</a></div></div>
+  </footer>
+  <script>
+    document.getElementById('yr').textContent=new Date().getFullYear();
+    const t=document.getElementById('nt'),m=document.getElementById('nm');
+    if(t&&m){t.addEventListener('click',()=>{const o=m.classList.toggle('open');t.setAttribute('aria-expanded',o);});}
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:0.1});
+    document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+  </script>
 </body>
 </html>
