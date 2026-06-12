@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Things Abound â Abound in Every Good Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --midnight: #1E1B4B;
+      --sapphire: #312E81;
+      --violet: #7C3AED;
+      --lavender: #C4B5FD;
+      --periwinkle: #C7D2FE;
+      --blush: #FBE9F3;
+      --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--midnight); color: var(--white); line-height: 1.7; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(30, 27, 75, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 300;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--lavender); text-decoration: none; transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--violet); color: var(--white) !important;
+      padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: #6d28d9 !important; }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--lavender); font-size: 1.5rem; }
+
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 8rem 5% 5rem;
+      background: radial-gradient(ellipse at 65% 40%, rgba(124,58,237,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(49,46,129,0.45) 0%, transparent 55%),
+                  var(--midnight);
+    }
+    .hero-crown { font-size: 3rem; margin-bottom: 0.4rem; }
+    .hero-logo-text {
+      font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 2.5rem;
+    }
+    .hero-verse {
+      font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--violet); margin-bottom: 1.5rem;
+    }
+    h1.hero-tagline {
+      font-family: 'Fraunces', serif; font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 300; line-height: 1.15; color: var(--white); max-width: 820px; margin-bottom: 1.5rem;
+    }
+    h1.hero-tagline em { font-style: italic; color: var(--lavender); }
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; color: var(--periwinkle);
+      max-width: 520px; margin-bottom: 3rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      display: inline-block; background: var(--violet); color: var(--white);
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em;
+      padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #6d28d9; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block; border: 1.5px solid var(--lavender); color: var(--lavender);
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em;
+      padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: all 0.25s;
+    }
+    .btn-ghost:hover { background: rgba(196,181,253,0.1); color: var(--white); border-color: var(--white); }
+
+    #mission {
+      background: var(--sapphire); text-align: center; padding: 5rem 5%;
+    }
+    .mission-inner { max-width: 720px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--violet); margin-bottom: 1rem;
+    }
+    .mission-text {
+      font-family: 'Fraunces', serif; font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+      font-weight: 300; font-style: italic; color: var(--white); line-height: 1.7;
+    }
+
+    #about-section { padding: 6rem 5%; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .about-visual {
+      width: 280px; height: 280px; border-radius: 50%; margin: 0 auto;
+      background: radial-gradient(circle at 40% 40%, rgba(124,58,237,0.5), rgba(49,46,129,0.2));
+      border: 1px solid rgba(124,58,237,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 5.5rem; font-weight: 300; color: var(--lavender);
+    }
+    .section-heading {
+      font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 300; line-height: 1.25; color: var(--white); margin-bottom: 1.3rem;
+    }
+    .section-heading em { color: var(--lavender); font-style: italic; }
+    .section-body {
+      font-size: 1rem; font-weight: 300; color: var(--periwinkle); line-height: 1.85;
+    }
+    .about-sub {
+      margin-top: 1.2rem; color: var(--lavender); font-style: italic;
+      font-size: 0.95rem; font-weight: 300; color: rgba(196,181,253,0.8);
+    }
+
+    #values { background: rgba(49,46,129,0.2); padding: 6rem 5%; }
+    .values-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; max-width: 960px; margin: 0 auto;
+    }
+    .value-card {
+      background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 16px; padding: 2rem; transition: transform 0.25s, border-color 0.25s;
+    }
+    .value-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.5); }
+    .value-card h3 {
+      font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 400;
+      color: var(--white); margin-bottom: 0.6rem;
+    }
+    .value-card p { font-size: 0.9rem; color: var(--periwinkle); font-weight: 300; line-height: 1.7; }
+
+    #services-section { padding: 6rem 5%; }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header { max-width: 580px; margin-bottom: 3.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .service-card {
+      border-radius: 20px; padding: 2.5rem; display: flex;
+      flex-direction: column; gap: 1rem;
+    }
+    .service-card.card-dark { background: var(--sapphire); }
+    .service-card.card-violet { background: var(--violet); }
+    .service-card.card-outlined { background: transparent; border: 1.5px solid rgba(124,58,237,0.4); }
+    .service-icon { font-size: 2rem; }
+    .service-card h3 {
+      font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 400; color: var(--white);
+    }
+    .service-card p { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.75; }
+    .service-link {
+      font-size: 0.85rem; font-weight: 600; color: var(--lavender); text-decoration: none;
+      letter-spacing: 0.05em; margin-top: auto; transition: color 0.2s;
+    }
+    .service-link:hover { color: var(--white); }
+
+    #promise {
+      background: radial-gradient(ellipse at center, rgba(124,58,237,0.3) 0%, transparent 65%), var(--midnight);
+      text-align: center; padding: 7rem 5%;
+    }
+    .promise-inner { max-width: 700px; margin: 0 auto; }
+    .promise-quote {
+      font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      font-weight: 300; font-style: italic; color: var(--white); line-height: 1.65; margin-bottom: 2.2rem;
+    }
+    .promise-quote span { color: var(--lavender); }
+
+    #cta { background: var(--violet); text-align: center; padding: 6rem 5%; }
+    #cta .section-label { color: rgba(255,255,255,0.6); }
+    #cta .section-heading { color: var(--white); max-width: 600px; margin: 0 auto 1.2rem; }
+    #cta .section-body { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 2.5rem; }
+    .btn-white {
+      display: inline-block; background: var(--white); color: var(--violet);
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 1rem 2.6rem; border-radius: 50px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+
+    footer {
+      background: #0f0d2e; padding: 3rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+      border-top: 1px solid rgba(124,58,237,0.2);
+    }
+    .footer-brand {
+      font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 300;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--lavender);
+    }
+    .footer-verse { font-size: 0.78rem; color: rgba(196,181,253,0.45); letter-spacing: 0.12em; }
+    .footer-links { display: flex; gap: 1.8rem; list-style: none; }
+    .footer-links a { font-size: 0.82rem; color: rgba(196,181,253,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--lavender); }
+
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">All Things Abound</a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#about-section">Our Story</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#services-section">Tools</a></li>
+      <li><a href="#cta" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="document.getElementById('nav-menu').style.display = document.getElementById('nav-menu').style.display === 'flex' ? 'none' : 'flex'" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-crown">&#x1F451;</div>
+    <p class="hero-logo-text">All Things Abound</p>
+    <p class="hero-verse">2 Corinthians 9:8</p>
+    <h1 class="hero-tagline">Abound in <em>every</em> good work.</h1>
+    <p class="hero-sub">Tools, resources, and encouragement for faith-driven entrepreneurs building something real.</p>
+    <div class="hero-btns">
+      <a href="#services-section" class="btn-primary">Explore the Tools</a>
+      <a href="#about-section" class="btn-ghost">Our Story</a>
+    </div>
+  </section>
+
+  <section id="mission">
+    <div class="mission-inner fade-up">
+      <p class="section-label">Mission</p>
+      <p class="mission-text">To equip faith-driven entrepreneurs with the tools, resources, and encouragement to build businesses that abound in every good work.</p>
+    </div>
+  </section>
+
+  <section id="about-section">
+    <div class="about-grid">
+      <div class="about-visual fade-up">&#x270D;</div>
+      <div class="fade-up">
+        <p class="section-label">Brand Story</p>
+        <h2 class="section-heading">You already have what you need <em>to begin.</em></h2>
+        <p class="section-body">All Things Abound started with a simple belief: not everything figured out &mdash; just enough. Enough grace, enough skill, enough courage for the next step. Built by solopreneurs, for solopreneurs, this brand offers tools that meet you where you are &mdash; clear-eyed about business, open about where the hope behind it comes from.</p>
+        <p class="section-body about-sub">For solopreneurs and small business owners &mdash; service providers, creatives, shop owners, freelancers. You don&rsquo;t have to share our faith to belong here.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="values">
+    <div class="values-header fade-up">
+      <p class="section-label">Core Values</p>
+      <h2 class="section-heading">How we show up <em>for you</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card fade-up">
+        <h3>Grace over grind</h3>
+        <p>Sustainable growth rooted in rest and trust, not burnout.</p>
+      </div>
+      <div class="value-card fade-up">
+        <h3>Equipped, not overwhelmed</h3>
+        <p>Practical tools that simplify, not add to the to-do list.</p>
+      </div>
+      <div class="value-card fade-up">
+        <h3>Abundance mindset</h3>
+        <p>There&rsquo;s enough &mdash; enough grace, resources, and room to grow.</p>
+      </div>
+      <div class="value-card fade-up">
+        <h3>Faith-first, judgment-free</h3>
+        <p>Welcoming to every season and stage of business and belief.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services-section">
+    <div class="services-inner">
+      <div class="services-header fade-up">
+        <p class="section-label">What We Offer</p>
+        <h2 class="section-heading">Tools built to help your work <em>abound</em></h2>
+        <p class="section-body">Guided assessments, planning tools, and social media support designed to help your work abound &mdash; without the burnout.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card card-dark fade-up">
+          <div class="service-icon">&#x1F4CB;</div>
+          <h3>Guided Assessments</h3>
+          <p>Discover your strengths and clarify your direction with assessments built for where you are, not where you think you should be.</p>
+          <a href="#cta" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card card-violet fade-up">
+          <div class="service-icon">&#x1F5FA;</div>
+          <h3>Planning Tools</h3>
+          <p>Practical, faith-grounded planning frameworks that simplify your next step and bring clarity to your business season.</p>
+          <a href="#cta" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card card-outlined fade-up">
+          <div class="service-icon">&#x1F4F1;</div>
+          <h3>Social Media Support</h3>
+          <p>Show up consistently and authentically online with templates, strategies, and guidance that fits your voice and your values.</p>
+          <a href="#cta" class="service-link">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="promise">
+    <div class="promise-inner fade-up">
+      <p class="section-label">The Promise</p>
+      <p class="promise-quote">&ldquo;You don&rsquo;t need everything figured out to start &mdash; <span>just the next step.</span>&rdquo;</p>
+      <a href="#cta" class="btn-primary">Take the next step</a>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="fade-up">
+      <p class="section-label">Get Started</p>
+      <h2 class="section-heading">Ready to build something that <em>abounds?</em></h2>
+      <p class="section-body">Join a community of solopreneurs who are building sustainably, faithfully, and without the overwhelm.</p>
+      <a href="mailto:hello@allthingsabound.com" class="btn-white">Connect With Us</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-brand">All Things Abound</span>
+    <span class="footer-verse">2 Corinthians 9:8</span>
+    <ul class="footer-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#services-section">Tools</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
