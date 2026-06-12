@@ -1,93 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  undefined
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Core Values - All Things Abound</title>
-  <meta name="description" content="Grace over grind. Equipped, not overwhelmed. Abundance mindset. Faith-first, judgment-free. The four values that shape All Things Abound." />
-  undefined
+  <meta name="description" content="Grace over grind. Equipped, not overwhelmed. Abundance mindset. Faith-first, judgment-free." />
+  undefinedundefined
+  <style>
+    .val-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .val-card { background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.4); border-radius:18px; padding:3rem; transition:transform .25s,border-color .25s; }
+    .val-card:hover { transform:translateY(-4px); border-color:rgba(124,58,237,0.7); }
+    .val-card .ico { font-size:2.5rem; margin-bottom:1rem; }
+    .val-card h3 { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:400; color:var(--white); margin-bottom:.8rem; }
+    .val-card p { font-size:.97rem; color:var(--periwinkle); font-weight:300; line-height:1.8; margin-bottom:1rem; }
+    .val-card .quote { color:rgba(196,181,253,.6); font-style:italic; font-size:.9rem; }
+    .do-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem; text-align:left; }
+    .do-box { border-radius:14px; padding:1.8rem; }
+    .do-box.yes { background:rgba(0,100,0,.15); border:1px solid rgba(0,200,0,.2); }
+    .do-box.no { background:rgba(100,0,0,.15); border:1px solid rgba(200,0,0,.2); }
+    .do-box .hd { font-size:.7rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; margin-bottom:1rem; }
+    .do-box.yes .hd { color:#86efac; }
+    .do-box.no .hd { color:#fca5a5; }
+    .do-box ul { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+    .do-box li { font-size:.92rem; color:var(--periwinkle); font-weight:300; }
+    @media(max-width:768px){ .val-grid,.do-grid{grid-template-columns:1fr;} }
+  </style>
 </head>
 <body>
 undefined
-  <main id="main-content">
-    <header class="page-header">
-      <span class="section-label">Core Values</span>
-      <h1>How we show up <em>for you</em></h1>
-      <p>Four principles that shape everything we build, teach, and share &mdash; from the tools to the tone.</p>
-    </header>
+<main id="main-content">
+  <header class="page-header">
+    <span class="lbl">Core Values</span>
+    <h1>How we show up <em>for you</em></h1>
+    <p>Four principles that shape everything we build, teach, and share &mdash; from the tools to the tone.</p>
+  </header>
 
-    <section class="section">
-      <div class="section-inner">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
-
-          <div class="card fade-up" style="padding:3rem; border-color:rgba(124,58,237,0.4);">
-            <div style="font-size:2.5rem; margin-bottom:1rem;">&#9996;&#65039;</div>
-            <h3 style="font-size:1.5rem; margin-bottom:0.8rem;">Grace over grind</h3>
-            <p style="margin-bottom:1rem;">Sustainable growth rooted in rest and trust, not burnout. We reject the hustle narrative. We believe there is a better way to build &mdash; one that honors your capacity, your season, and your humanity.</p>
-            <p style="color:rgba(196,181,253,0.6); font-style:italic; font-size:0.9rem;">&ldquo;You don&rsquo;t have to earn your way to enough. You already are.&rdquo;</p>
-          </div>
-
-          <div class="card fade-up" style="padding:3rem; border-color:rgba(124,58,237,0.4);">
-            <div style="font-size:2.5rem; margin-bottom:1rem;">&#128736;</div>
-            <h3 style="font-size:1.5rem; margin-bottom:0.8rem;">Equipped, not overwhelmed</h3>
-            <p style="margin-bottom:1rem;">Practical tools that simplify, not add to the to-do list. Every resource we create is designed to reduce friction &mdash; to give you what you need and get out of the way so you can do your work.</p>
-            <p style="color:rgba(196,181,253,0.6); font-style:italic; font-size:0.9rem;">&ldquo;The next step, not the whole staircase.&rdquo;</p>
-          </div>
-
-          <div class="card fade-up" style="padding:3rem; border-color:rgba(124,58,237,0.4);">
-            <div style="font-size:2.5rem; margin-bottom:1rem;">&#127881;</div>
-            <h3 style="font-size:1.5rem; margin-bottom:0.8rem;">Abundance mindset</h3>
-            <p style="margin-bottom:1rem;">There&rsquo;s enough &mdash; enough grace, resources, and room to grow. We don&rsquo;t operate from scarcity. We believe there is space for your business, your voice, and your contribution in this world.</p>
-            <p style="color:rgba(196,181,253,0.6); font-style:italic; font-size:0.9rem;">&ldquo;Your success doesn&rsquo;t come at someone else&rsquo;s expense.&rdquo;</p>
-          </div>
-
-          <div class="card fade-up" style="padding:3rem; border-color:rgba(124,58,237,0.4);">
-            <div style="font-size:2.5rem; margin-bottom:1rem;">&#129309;</div>
-            <h3 style="font-size:1.5rem; margin-bottom:0.8rem;">Faith-first, judgment-free</h3>
-            <p style="margin-bottom:1rem;">Welcoming to every season and stage of business and belief. You don&rsquo;t have to share our faith to belong here. We are open about where our hope comes from while remaining genuinely welcoming to all.</p>
-            <p style="color:rgba(196,181,253,0.6); font-style:italic; font-size:0.9rem;">&ldquo;There is room for you here, exactly as you are.&rdquo;</p>
-          </div>
-
+  <section class="sec">
+    <div class="inner">
+      <div class="val-grid">
+        <div class="val-card fu">
+          <div class="ico">&#9996;&#65039;</div>
+          <h3>Grace over grind</h3>
+          <p>Sustainable growth rooted in rest and trust, not burnout. We reject the hustle narrative. We believe there is a better way to build &mdash; one that honors your capacity, your season, and your humanity.</p>
+          <p class="quote">&ldquo;You don&rsquo;t have to earn your way to enough. You already are.&rdquo;</p>
+        </div>
+        <div class="val-card fu">
+          <div class="ico">&#128736;</div>
+          <h3>Equipped, not overwhelmed</h3>
+          <p>Practical tools that simplify, not add to the to-do list. Every resource we create is designed to reduce friction &mdash; to give you what you need and get out of the way so you can do your work.</p>
+          <p class="quote">&ldquo;The next step, not the whole staircase.&rdquo;</p>
+        </div>
+        <div class="val-card fu">
+          <div class="ico">&#127881;</div>
+          <h3>Abundance mindset</h3>
+          <p>There&rsquo;s enough &mdash; enough grace, resources, and room to grow. We don&rsquo;t operate from scarcity. We believe there is space for your business, your voice, and your contribution in this world.</p>
+          <p class="quote">&ldquo;Your success doesn&rsquo;t come at someone else&rsquo;s expense.&rdquo;</p>
+        </div>
+        <div class="val-card fu">
+          <div class="ico">&#129309;</div>
+          <h3>Faith-first, judgment-free</h3>
+          <p>Welcoming to every season and stage of business and belief. You don&rsquo;t have to share our faith to belong here. We are open about where our hope comes from while remaining genuinely welcoming to all.</p>
+          <p class="quote">&ldquo;There is room for you here, exactly as you are.&rdquo;</p>
         </div>
       </div>
-    </section>
-
-    <section class="section section-sapphire" style="text-align:center;">
-      <div class="section-inner-narrow fade-up">
-        <span class="section-label">In Practice</span>
-        <h2 class="section-heading">What we <em>do</em> and what we <em>don&rsquo;t</em></h2>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem; text-align:left;">
-          <div style="background:rgba(0,100,0,0.15); border:1px solid rgba(0,200,0,0.2); border-radius:14px; padding:1.8rem;">
-            <p style="font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#86efac; margin-bottom:1rem;">We Do</p>
-            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem;">
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10003;&nbsp; Meet you where you are</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10003;&nbsp; Offer practical, next-step tools</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10003;&nbsp; Speak plainly and honestly</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10003;&nbsp; Honor your capacity and season</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10003;&nbsp; &ldquo;You don&rsquo;t need everything figured out to start &mdash; just the next step.&rdquo;</li>
-            </ul>
-          </div>
-          <div style="background:rgba(100,0,0,0.15); border:1px solid rgba(200,0,0,0.2); border-radius:14px; padding:1.8rem;">
-            <p style="font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fca5a5; margin-bottom:1rem;">We Don&rsquo;t</p>
-            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem;">
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10007;&nbsp; Use hype or urgency tactics</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10007;&nbsp; Add to your overwhelm</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10007;&nbsp; Guilt or shame as motivation</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10007;&nbsp; Perform or exaggerate results</li>
-              <li style="font-size:0.92rem; color:var(--periwinkle); font-weight:300;">&#10007;&nbsp; &ldquo;GOD has BLESSED us with this AMAZING offer!! Don&rsquo;t miss it!!&rdquo;</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="cta-band">
-      <span class="section-label">See It in Action</span>
-      <h2>Explore the tools built <em>around these values.</em></h2>
-      <p>Guided assessments, planning frameworks, and social media support &mdash; all shaped by grace, not grind.</p>
-      <a href="tools.html" class="btn-white">See the Tools</a>
     </div>
-  </main>
-undefined
+  </section>
+
+  <section class="sec sec-sap" style="text-align:center;">
+    <div class="inner-n fu">
+      <span class="lbl">In Practice</span>
+      <h2 class="sh">What we <em>do</em> and what we <em>don&rsquo;t</em></h2>
+      <div class="do-grid">
+        <div class="do-box yes">
+          <p class="hd">We Do</p>
+          <ul>
+            <li>&#10003;&nbsp; Meet you where you are</li>
+            <li>&#10003;&nbsp; Offer practical, next-step tools</li>
+            <li>&#10003;&nbsp; Speak plainly and honestly</li>
+            <li>&#10003;&nbsp; Honor your capacity and season</li>
+            <li>&#10003;&nbsp; &ldquo;You don&rsquo;t need everything figured out to start &mdash; just the next step.&rdquo;</li>
+          </ul>
+        </div>
+        <div class="do-box no">
+          <p class="hd">We Don&rsquo;t</p>
+          <ul>
+            <li>&#10007;&nbsp; Use hype or urgency tactics</li>
+            <li>&#10007;&nbsp; Add to your overwhelm</li>
+            <li>&#10007;&nbsp; Guilt or shame as motivation</li>
+            <li>&#10007;&nbsp; Perform or exaggerate results</li>
+            <li>&#10007;&nbsp; &ldquo;GOD has BLESSED us with this AMAZING offer!! Don&rsquo;t miss it!!&rdquo;</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <span class="lbl">See It in Action</span>
+    <h2>Explore the tools built <em>around these values.</em></h2>
+    <p>Guided assessments, planning frameworks, and social media support &mdash; all shaped by grace, not grind.</p>
+    <a href="tools.html" class="btn-w">See the Tools</a>
+  </div>
+</main>
 undefined
 </body>
 </html>
