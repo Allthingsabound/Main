@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services & Pricing - All Things Abound</title>
+  <meta name="description" content="Choose the support that fits your season. Guided assessments, planning, and social media services for faith-driven solopreneurs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --midnight: #1E1B4B; --sapphire: #312E81; --violet: #7C3AED; --lavender: #C4B5FD; --periwinkle: #C7D2FE; --blush: #FBE9F3; --white: #FFFFFF; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--midnight); color: var(--white); line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(30,27,75,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(124,58,237,0.18); }
+    .nav-logo-wrap { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 42px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .nav-logo-text { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--lavender); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--white); }
+    .nav-cta { background: var(--violet); color: var(--white) !important; padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #6d28d9 !important; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--lavender); font-size: 1.4rem; cursor: pointer; padding: 0.25rem; }
+    .page-header { padding: 9rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.22) 0%, transparent 60%), var(--midnight); border-bottom: 1px solid rgba(124,58,237,0.15); }
+    .page-header .lbl { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    .page-header h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; color: var(--white); line-height: 1.2; }
+    .page-header h1 em { color: var(--lavender); font-style: italic; }
+    .page-header p { margin-top: 1rem; font-size: 1.05rem; font-weight: 300; color: var(--periwinkle); max-width: 580px; margin-left: auto; margin-right: auto; }
+    .sec { padding: 6rem 5%; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .inner-n { max-width: 740px; margin: 0 auto; }
+    .lbl { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    h2.sh { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.25; color: var(--white); margin-bottom: 1.3rem; }
+    h2.sh em { color: var(--lavender); font-style: italic; }
+    p.sb { font-size: 1rem; font-weight: 300; color: var(--periwinkle); line-height: 1.85; }
+    .sec-alt { background: rgba(49,46,129,0.2); }
+    .btn-p { display: inline-block; background: var(--violet); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: background 0.25s, transform 0.2s; }
+    .btn-p:hover { background: #6d28d9; transform: translateY(-2px); }
+    .btn-g { display: inline-block; border: 1.5px solid var(--lavender); color: var(--lavender); font-size: 0.9rem; font-weight: 500; padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: all 0.25s; }
+    .btn-g:hover { background: rgba(196,181,253,0.1); color: var(--white); border-color: var(--white); }
+    .btn-w { display: inline-block; background: var(--white); color: var(--violet); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; padding: 1rem 2.6rem; border-radius: 50px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-w:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+    .cta-band { background: var(--violet); text-align: center; padding: 5.5rem 5%; }
+    .cta-band h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--white); max-width: 600px; margin: 0 auto 1rem; line-height: 1.25; }
+    .cta-band h2 em { font-style: italic; color: rgba(255,255,255,0.85); }
+    .cta-band p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 2.2rem; }
+    footer { background: #0d0b28; padding: 4rem 5% 2rem; border-top: 1px solid rgba(124,58,237,0.18); }
+    .ft { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .fl { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+    .fl img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .fb { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); }
+    .fv { font-size: 0.75rem; color: rgba(196,181,253,0.35); letter-spacing: 0.14em; }
+    .fch { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    .fn ul { list-style: none; }
+    .fn li { margin-bottom: 0.6rem; }
+    .fn a { font-size: 0.87rem; color: rgba(196,181,253,0.55); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+    .fn a:hover { color: var(--lavender); }
+    .fb2 { border-top: 1px solid rgba(124,58,237,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .fb2 p { font-size: 0.8rem; color: rgba(196,181,253,0.35); }
+    .fll { display: flex; gap: 1.5rem; }
+    .fll a { font-size: 0.8rem; color: rgba(196,181,253,0.35); text-decoration: none; transition: color 0.2s; }
+    .fll a:hover { color: var(--lavender); }
+    .fu { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fu.vis { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) { .ft { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(30,27,75,0.98); padding: 1.5rem 5%; gap: 1.2rem; border-bottom: 1px solid rgba(124,58,237,0.2); } .nav-links.open { display: flex; } .nav-toggle { display: block; } .ft { grid-template-columns: 1fr; gap: 2rem; } .fb2 { flex-direction: column; text-align: center; } }
+
+    /* PRICING TIERS */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .tier { border-radius: 20px; padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; position: relative; }
+    .tier-starter { background: rgba(49,46,129,0.4); border: 1px solid rgba(124,58,237,0.3); }
+    .tier-growth { background: var(--sapphire); border: 1px solid rgba(124,58,237,0.5); }
+    .tier-premium { background: var(--violet); }
+    .tier-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--lavender); color: var(--midnight); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 50px; white-space: nowrap; }
+    .tier-name { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(196,181,253,0.7); }
+    .tier h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 300; color: var(--white); }
+    .tier-price { display: flex; align-items: baseline; gap: 0.3rem; }
+    .tier-price .amount { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--white); }
+    .tier-price .period { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+    .tier-price .placeholder-price { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(196,181,253,0.4); border: 1px dashed rgba(196,181,253,0.2); padding: 0.4rem 1rem; border-radius: 6px; }
+    .tier-desc { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.7; }
+    .tier-divider { height: 1px; background: rgba(255,255,255,0.1); }
+    .tier-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
+    .tier-features li { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.8); display: flex; gap: 0.6rem; align-items: flex-start; }
+    .tier-features li::before { content: '✓'; color: var(--lavender); font-weight: 600; flex-shrink: 0; margin-top: 0.05rem; }
+    .tier-features li.placeholder { color: rgba(196,181,253,0.35); font-style: italic; }
+    .tier-features li.placeholder::before { content: '·'; color: rgba(196,181,253,0.25); }
+    .tier-cta { margin-top: auto; }
+
+    /* SERVICE CATEGORIES */
+    .service-cat { border-radius: 20px; padding: 3rem; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.22); margin-bottom: 2rem; }
+    .service-cat:last-child { margin-bottom: 0; }
+    .service-cat-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .service-cat-ico { font-size: 2rem; }
+    .service-cat h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 400; color: var(--white); }
+    .service-cat p { font-size: 0.95rem; font-weight: 300; color: var(--periwinkle); line-height: 1.8; margin-bottom: 1.2rem; }
+    .service-items { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .service-item { background: rgba(196,181,253,0.08); border: 1px solid rgba(196,181,253,0.2); color: var(--lavender); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.82rem; }
+    .service-item.placeholder { color: rgba(196,181,253,0.35); border-color: rgba(196,181,253,0.1); font-style: italic; }
+
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; } }
+  </style>
+</head>
+<body>
+<nav role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo-wrap" aria-label="All Things Abound home">
+    <img src="logo.png" alt="All Things Abound logo" class="nav-logo-img" />
+    <span class="nav-logo-text">All Things Abound</span>
+  </a>
+  <button class="nav-toggle" id="nt" aria-controls="nm" aria-expanded="false" aria-label="Open navigation menu">&#9776;</button>
+  <ul class="nav-links" id="nm" role="list">
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="services.html" aria-current="page">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+  <header class="page-header">
+    <span class="lbl">Services &amp; Pricing</span>
+    <h1>Support that fits <em>your season.</em></h1>
+    <p>Choose the level of support that matches where you are right now &mdash; no pressure, no upsell, just the next right step.</p>
+  </header>
+
+  <!-- SERVICE CATEGORIES -->
+  <section class="sec">
+    <div class="inner">
+      <span class="lbl">What&rsquo;s Included</span>
+      <h2 class="sh fu">Three areas of <em>focused support</em></h2>
+
+      <div class="service-cat fu">
+        <div class="service-cat-header">
+          <span class="service-cat-ico">&#128203;</span>
+          <h3>[Service Category 1 &mdash; Placeholder]</h3>
+        </div>
+        <p>[Short description of what this service category covers and who it&rsquo;s for. 1&ndash;2 sentences. Replace with real copy.]</p>
+        <div class="service-items">
+          <span class="service-item">[Deliverable 1]</span>
+          <span class="service-item">[Deliverable 2]</span>
+          <span class="service-item">[Deliverable 3]</span>
+          <span class="service-item placeholder">+ more coming</span>
+        </div>
+      </div>
+
+      <div class="service-cat fu">
+        <div class="service-cat-header">
+          <span class="service-cat-ico">&#128506;</span>
+          <h3>[Service Category 2 &mdash; Placeholder]</h3>
+        </div>
+        <p>[Short description of what this service category covers and who it&rsquo;s for. 1&ndash;2 sentences. Replace with real copy.]</p>
+        <div class="service-items">
+          <span class="service-item">[Deliverable 1]</span>
+          <span class="service-item">[Deliverable 2]</span>
+          <span class="service-item">[Deliverable 3]</span>
+          <span class="service-item placeholder">+ more coming</span>
+        </div>
+      </div>
+
+      <div class="service-cat fu">
+        <div class="service-cat-header">
+          <span class="service-cat-ico">&#128241;</span>
+          <h3>[Service Category 3 &mdash; Placeholder]</h3>
+        </div>
+        <p>[Short description of what this service category covers and who it&rsquo;s for. 1&ndash;2 sentences. Replace with real copy.]</p>
+        <div class="service-items">
+          <span class="service-item">[Deliverable 1]</span>
+          <span class="service-item">[Deliverable 2]</span>
+          <span class="service-item">[Deliverable 3]</span>
+          <span class="service-item placeholder">+ more coming</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING TIERS -->
+  <section class="sec sec-alt" id="pricing">
+    <div class="inner">
+      <span class="lbl">Pricing</span>
+      <h2 class="sh fu">Pick your <em>starting point</em></h2>
+      <p class="sb fu" style="max-width:560px;">All tiers are designed to deliver real value at the right level of support. Not sure which fits? Reach out &mdash; we&rsquo;ll help you figure it out.</p>
+      <div class="pricing-grid">
+
+        <div class="tier tier-starter fu">
+          <span class="tier-name">Tier 1</span>
+          <h3>[Starter Tier Name]</h3>
+          <div class="tier-price"><span class="placeholder-price">Price TBD</span></div>
+          <p class="tier-desc">[One sentence describing who this tier is perfect for and the core benefit.]</p>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+          </ul>
+          <div class="tier-cta">
+            <a href="contact.html" class="btn-g" style="width:100%;text-align:center;display:block;">Get Started</a>
+          </div>
+        </div>
+
+        <div class="tier tier-growth fu" style="position:relative;">
+          <span class="tier-badge">Most Popular</span>
+          <span class="tier-name">Tier 2</span>
+          <h3>[Growth Tier Name]</h3>
+          <div class="tier-price"><span class="placeholder-price">Price TBD</span></div>
+          <p class="tier-desc">[One sentence describing who this tier is perfect for and the core benefit.]</p>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+          </ul>
+          <div class="tier-cta">
+            <a href="contact.html" class="btn-p" style="width:100%;text-align:center;display:block;">Get Started</a>
+          </div>
+        </div>
+
+        <div class="tier tier-premium fu">
+          <span class="tier-name">Tier 3</span>
+          <h3>[Premium Tier Name]</h3>
+          <div class="tier-price"><span class="placeholder-price">Price TBD</span></div>
+          <p class="tier-desc">[One sentence describing who this tier is perfect for and the core benefit.]</p>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+            <li class="placeholder">[Feature placeholder]</li>
+          </ul>
+          <div class="tier-cta">
+            <a href="contact.html" class="btn-w" style="width:100%;text-align:center;display:block;">Get Started</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ PLACEHOLDER -->
+  <section class="sec">
+    <div class="inner-n fu" style="text-align:center;">
+      <span class="lbl">Questions</span>
+      <h2 class="sh">Not sure where to <em>start?</em></h2>
+      <p class="sb" style="max-width:480px;margin:0 auto 2rem;">Every person&rsquo;s season looks different. Reach out and tell me where you are &mdash; we&rsquo;ll find the right fit together.</p>
+      <a href="contact.html" class="btn-p">Talk It Through</a>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <span class="lbl">Ready?</span>
+    <h2>Let&rsquo;s build something that <em>abounds.</em></h2>
+    <p>No pressure, no jargon. Just a conversation about where you are and where you want to go.</p>
+    <a href="contact.html" class="btn-w">Work With Me</a>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="ft">
+    <div>
+      <div class="fl"><img src="logo.png" alt="All Things Abound" /><span class="fb">All Things Abound</span></div>
+      <p style="font-family:'Fraunces',serif;font-size:.9rem;font-style:italic;color:rgba(196,181,253,.6);font-weight:300;margin-bottom:.3rem;">Abound in every good work.</p>
+      <p class="fv">2 Corinthians 9:8</p>
+    </div>
+    <div class="fn"><p class="fch">Pages</p><ul>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Work With Me</a></li>
+    </ul></div>
+    <div class="fn"><p class="fch">Legal</p><ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="accessibility.html">Accessibility</a></li>
+    </ul></div>
+    <div class="fn"><p class="fch">Connect</p><ul>
+      <li><a href="mailto:hello@allthingsabound.com">Email Us</a></li>
+    </ul></div>
+  </div>
+  <div class="fb2">
+    <p>&copy; <span id="yr"></span> All Things Abound. All rights reserved.</p>
+    <div class="fll"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="accessibility.html">Accessibility</a></div>
+  </div>
+</footer>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const t = document.getElementById('nt'), m = document.getElementById('nm');
+  if (t && m) { t.addEventListener('click', () => { const o = m.classList.toggle('open'); t.setAttribute('aria-expanded', o); }); }
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }), { threshold: 0.1 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

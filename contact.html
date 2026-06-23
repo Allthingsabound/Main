@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work With Me - All Things Abound</title>
+  <meta name="description" content="Ready to build something that abounds? Let's talk. Tell me where you are and I'll help you find the right next step." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --midnight: #1E1B4B; --sapphire: #312E81; --violet: #7C3AED; --lavender: #C4B5FD; --periwinkle: #C7D2FE; --blush: #FBE9F3; --white: #FFFFFF; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--midnight); color: var(--white); line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(30,27,75,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(124,58,237,0.18); }
+    .nav-logo-wrap { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 42px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .nav-logo-text { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--lavender); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--white); }
+    .nav-cta { background: var(--violet); color: var(--white) !important; padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #6d28d9 !important; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--lavender); font-size: 1.4rem; cursor: pointer; padding: 0.25rem; }
+    .page-header { padding: 9rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.22) 0%, transparent 60%), var(--midnight); border-bottom: 1px solid rgba(124,58,237,0.15); }
+    .page-header .lbl { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    .page-header h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; color: var(--white); line-height: 1.2; }
+    .page-header h1 em { color: var(--lavender); font-style: italic; }
+    .page-header p { margin-top: 1rem; font-size: 1.05rem; font-weight: 300; color: var(--periwinkle); max-width: 580px; margin-left: auto; margin-right: auto; }
+    .sec { padding: 6rem 5%; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .inner-n { max-width: 740px; margin: 0 auto; }
+    .lbl { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    h2.sh { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.25; color: var(--white); margin-bottom: 1.3rem; }
+    h2.sh em { color: var(--lavender); font-style: italic; }
+    p.sb { font-size: 1rem; font-weight: 300; color: var(--periwinkle); line-height: 1.85; }
+    .sec-alt { background: rgba(49,46,129,0.2); }
+    .btn-p { display: inline-block; background: var(--violet); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: background 0.25s, transform 0.2s; }
+    .btn-p:hover { background: #6d28d9; transform: translateY(-2px); }
+    footer { background: #0d0b28; padding: 4rem 5% 2rem; border-top: 1px solid rgba(124,58,237,0.18); }
+    .ft { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .fl { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+    .fl img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .fb { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); }
+    .fv { font-size: 0.75rem; color: rgba(196,181,253,0.35); letter-spacing: 0.14em; }
+    .fch { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    .fn ul { list-style: none; }
+    .fn li { margin-bottom: 0.6rem; }
+    .fn a { font-size: 0.87rem; color: rgba(196,181,253,0.55); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+    .fn a:hover { color: var(--lavender); }
+    .fb2 { border-top: 1px solid rgba(124,58,237,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .fb2 p { font-size: 0.8rem; color: rgba(196,181,253,0.35); }
+    .fll { display: flex; gap: 1.5rem; }
+    .fll a { font-size: 0.8rem; color: rgba(196,181,253,0.35); text-decoration: none; transition: color 0.2s; }
+    .fll a:hover { color: var(--lavender); }
+    .fu { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fu.vis { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) { .ft { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(30,27,75,0.98); padding: 1.5rem 5%; gap: 1.2rem; border-bottom: 1px solid rgba(124,58,237,0.2); } .nav-links.open { display: flex; } .nav-toggle { display: block; } .ft { grid-template-columns: 1fr; gap: 2rem; } .fb2 { flex-direction: column; text-align: center; } .contact-layout { grid-template-columns: 1fr !important; } }
+
+    /* CONTACT LAYOUT */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+
+    /* SIDEBAR INFO */
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .info-block { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.22); border-radius: 16px; padding: 1.8rem; }
+    .info-block .info-ico { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .info-block h4 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 400; color: var(--white); margin-bottom: 0.4rem; }
+    .info-block p { font-size: 0.88rem; font-weight: 300; color: var(--periwinkle); line-height: 1.7; }
+    .info-block a { color: var(--lavender); text-decoration: none; }
+    .info-block a:hover { color: var(--white); }
+
+    /* INTAKE FORM */
+    .form-card { background: rgba(49,46,129,0.3); border: 1px solid rgba(124,58,237,0.25); border-radius: 24px; padding: 3rem; }
+    .form-card h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 300; color: var(--white); margin-bottom: 0.5rem; }
+    .form-card .form-sub { font-size: 0.92rem; font-weight: 300; color: var(--periwinkle); margin-bottom: 2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.4rem; }
+    .form-group label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(196,181,253,0.7); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea { background: rgba(30,27,75,0.7); border: 1px solid rgba(124,58,237,0.3); border-radius: 10px; color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 300; padding: 0.85rem 1.1rem; width: 100%; transition: border-color 0.2s; outline: none; -webkit-appearance: none; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(196,181,253,0.3); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--violet); }
+    .form-group select option { background: #1E1B4B; }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-notice { font-size: 0.78rem; font-weight: 300; color: rgba(196,181,253,0.4); margin-top: 0.5rem; line-height: 1.6; }
+    .form-submit { margin-top: 0.5rem; }
+    .form-submit button { background: var(--violet); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.05em; padding: 1rem 2.6rem; border-radius: 50px; border: none; cursor: pointer; transition: background 0.25s, transform 0.2s; width: 100%; }
+    .form-submit button:hover { background: #6d28d9; transform: translateY(-2px); }
+
+    /* PLACEHOLDER NOTE */
+    .form-placeholder-note { background: rgba(124,58,237,0.12); border: 1px dashed rgba(124,58,237,0.35); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: rgba(196,181,253,0.55); font-style: italic; }
+  </style>
+</head>
+<body>
+<nav role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo-wrap" aria-label="All Things Abound home">
+    <img src="logo.png" alt="All Things Abound logo" class="nav-logo-img" />
+    <span class="nav-logo-text">All Things Abound</span>
+  </a>
+  <button class="nav-toggle" id="nt" aria-controls="nm" aria-expanded="false" aria-label="Open navigation menu">&#9776;</button>
+  <ul class="nav-links" id="nm" role="list">
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" aria-current="page" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+  <header class="page-header">
+    <span class="lbl">Work With Me</span>
+    <h1>Let&rsquo;s find your <em>next step.</em></h1>
+    <p>Tell me where you are. I&rsquo;ll help you figure out where to go and how to get there &mdash; without the overwhelm.</p>
+  </header>
+
+  <section class="sec">
+    <div class="inner">
+      <div class="contact-layout">
+
+        <!-- SIDEBAR -->
+        <div class="contact-info fu">
+          <div class="info-block">
+            <div class="info-ico">&#9993;&#65039;</div>
+            <h4>Email</h4>
+            <p>Prefer to reach out directly? I&rsquo;d love to hear from you.<br /><a href="mailto:hello@allthingsabound.com">hello@allthingsabound.com</a></p>
+          </div>
+          <div class="info-block">
+            <div class="info-ico">&#128337;</div>
+            <h4>Response Time</h4>
+            <p>[Placeholder: How quickly do you typically respond? e.g., &ldquo;Within 48 business hours&rdquo;]</p>
+          </div>
+          <div class="info-block">
+            <div class="info-ico">&#128205;</div>
+            <h4>Availability</h4>
+            <p>[Placeholder: Are you currently taking new clients? Any waitlist? Geographic availability?]</p>
+          </div>
+          <div class="info-block">
+            <div class="info-ico">&#128172;</div>
+            <h4>What to Expect</h4>
+            <p>[Placeholder: What happens after someone submits the form? e.g., &ldquo;I&rsquo;ll reach out to schedule a free 30-minute intro call.&rdquo;]</p>
+          </div>
+        </div>
+
+        <!-- INTAKE FORM -->
+        <div class="form-card fu">
+          <h3>Tell me about <em>your work</em></h3>
+          <p class="form-sub">No pressure &mdash; this is just a conversation starter. Fill in what you know.</p>
+
+          <div class="form-placeholder-note">
+            &#128221; This form is a placeholder. Connect it to Formspree, Netlify Forms, or your preferred form backend before going live.
+          </div>
+
+          <form action="#" method="POST" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" placeholder="Your first name" autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Your last name" autocomplete="family-name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@yourbusiness.com" autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label for="business">Business Name <span style="opacity:0.5;font-weight:300;">(optional)</span></label>
+              <input type="text" id="business" name="business" placeholder="Your business or brand name" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">What are you interested in?</label>
+              <select id="service" name="service">
+                <option value="" disabled selected>Select a service area&hellip;</option>
+                <option value="placeholder-1">[Service Option 1 &mdash; Placeholder]</option>
+                <option value="placeholder-2">[Service Option 2 &mdash; Placeholder]</option>
+                <option value="placeholder-3">[Service Option 3 &mdash; Placeholder]</option>
+                <option value="not-sure">I&rsquo;m not sure yet &mdash; help me figure it out</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="season">Where are you right now?</label>
+              <select id="season" name="season">
+                <option value="" disabled selected>Choose your current season&hellip;</option>
+                <option value="just-starting">Just starting out</option>
+                <option value="early-stage">Early stage &mdash; getting traction</option>
+                <option value="growing">Growing &mdash; need more structure</option>
+                <option value="stuck">Feeling stuck or overwhelmed</option>
+                <option value="pivoting">Pivoting or reimagining my business</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell me a little about what you&rsquo;re working on</label>
+              <textarea id="message" name="message" placeholder="What&rsquo;s your business, what are you building, and what feels hard right now? There are no wrong answers."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="how-heard">How did you find All Things Abound? <span style="opacity:0.5;font-weight:300;">(optional)</span></label>
+              <input type="text" id="how-heard" name="how_heard" placeholder="e.g., Instagram, a friend, Google&hellip;" />
+            </div>
+
+            <p class="form-notice">By submitting this form you agree to our <a href="privacy.html" style="color:var(--lavender);">Privacy Policy</a>. Your information will never be sold or shared.</p>
+
+            <div class="form-submit">
+              <button type="submit">Send My Message &rarr;</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REASSURANCE STRIP -->
+  <section class="sec sec-alt">
+    <div class="inner-n fu" style="text-align:center;">
+      <span class="lbl">A Gentle Reminder</span>
+      <h2 class="sh" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">&ldquo;You don&rsquo;t need everything figured out to start &mdash; <em>just the next step.</em>&rdquo;</h2>
+      <p class="sb" style="max-width:480px;margin:1rem auto 0;">Whatever season you&rsquo;re in, there&rsquo;s room here to grow. No hustle required.</p>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <div class="ft">
+    <div>
+      <div class="fl"><img src="logo.png" alt="All Things Abound" /><span class="fb">All Things Abound</span></div>
+      <p style="font-family:'Fraunces',serif;font-size:.9rem;font-style:italic;color:rgba(196,181,253,.6);font-weight:300;margin-bottom:.3rem;">Abound in every good work.</p>
+      <p class="fv">2 Corinthians 9:8</p>
+    </div>
+    <div class="fn"><p class="fch">Pages</p><ul>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Work With Me</a></li>
+    </ul></div>
+    <div class="fn"><p class="fch">Legal</p><ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="accessibility.html">Accessibility</a></li>
+    </ul></div>
+    <div class="fn"><p class="fch">Connect</p><ul>
+      <li><a href="mailto:hello@allthingsabound.com">Email Us</a></li>
+    </ul></div>
+  </div>
+  <div class="fb2">
+    <p>&copy; <span id="yr"></span> All Things Abound. All rights reserved.</p>
+    <div class="fll"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="accessibility.html">Accessibility</a></div>
+  </div>
+</footer>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const t = document.getElementById('nt'), m = document.getElementById('nm');
+  if (t && m) { t.addEventListener('click', () => { const o = m.classList.toggle('open'); t.setAttribute('aria-expanded', o); }); }
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }), { threshold: 0.1 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

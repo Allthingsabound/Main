@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - All Things Abound</title>
+  <meta name="description" content="The story, faith foundation, and certifications behind All Things Abound — built by a solopreneur, for solopreneurs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --midnight: #1E1B4B; --sapphire: #312E81; --violet: #7C3AED; --lavender: #C4B5FD; --periwinkle: #C7D2FE; --blush: #FBE9F3; --white: #FFFFFF; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--midnight); color: var(--white); line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(30,27,75,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(124,58,237,0.18); }
+    .nav-logo-wrap { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 42px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .nav-logo-text { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--lavender); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--white); }
+    .nav-cta { background: var(--violet); color: var(--white) !important; padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #6d28d9 !important; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--lavender); font-size: 1.4rem; cursor: pointer; padding: 0.25rem; }
+    .page-header { padding: 9rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.22) 0%, transparent 60%), var(--midnight); border-bottom: 1px solid rgba(124,58,237,0.15); }
+    .page-header .lbl { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    .page-header h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; color: var(--white); line-height: 1.2; }
+    .page-header h1 em { color: var(--lavender); font-style: italic; }
+    .page-header p { margin-top: 1rem; font-size: 1.05rem; font-weight: 300; color: var(--periwinkle); max-width: 580px; margin-left: auto; margin-right: auto; }
+    .sec { padding: 6rem 5%; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .inner-n { max-width: 740px; margin: 0 auto; }
+    .lbl { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    h2.sh { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.25; color: var(--white); margin-bottom: 1.3rem; }
+    h2.sh em { color: var(--lavender); font-style: italic; }
+    p.sb { font-size: 1rem; font-weight: 300; color: var(--periwinkle); line-height: 1.85; }
+    .sec-alt { background: rgba(49,46,129,0.2); }
+    .sec-sap { background: var(--sapphire); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .btn-p { display: inline-block; background: var(--violet); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: background 0.25s, transform 0.2s; }
+    .btn-p:hover { background: #6d28d9; transform: translateY(-2px); }
+    .btn-g { display: inline-block; border: 1.5px solid var(--lavender); color: var(--lavender); font-size: 0.9rem; font-weight: 500; padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: all 0.25s; }
+    .btn-g:hover { background: rgba(196,181,253,0.1); color: var(--white); border-color: var(--white); }
+    .btn-w { display: inline-block; background: var(--white); color: var(--violet); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; padding: 1rem 2.6rem; border-radius: 50px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-w:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+    .cta-band { background: var(--violet); text-align: center; padding: 5.5rem 5%; }
+    .cta-band h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--white); max-width: 600px; margin: 0 auto 1rem; line-height: 1.25; }
+    .cta-band h2 em { font-style: italic; color: rgba(255,255,255,0.85); }
+    .cta-band p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 2.2rem; }
+    footer { background: #0d0b28; padding: 4rem 5% 2rem; border-top: 1px solid rgba(124,58,237,0.18); }
+    .ft { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .fl { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+    .fl img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .fb { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); }
+    .fv { font-size: 0.75rem; color: rgba(196,181,253,0.35); letter-spacing: 0.14em; }
+    .fch { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blush); margin-bottom: 1rem; }
+    .fn ul { list-style: none; }
+    .fn li { margin-bottom: 0.6rem; }
+    .fn a { font-size: 0.87rem; color: rgba(196,181,253,0.55); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+    .fn a:hover { color: var(--lavender); }
+    .fb2 { border-top: 1px solid rgba(124,58,237,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .fb2 p { font-size: 0.8rem; color: rgba(196,181,253,0.35); }
+    .fll { display: flex; gap: 1.5rem; }
+    .fll a { font-size: 0.8rem; color: rgba(196,181,253,0.35); text-decoration: none; transition: color 0.2s; }
+    .fll a:hover { color: var(--lavender); }
+    .fu { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fu.vis { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) { .ft { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(30,27,75,0.98); padding: 1.5rem 5%; gap: 1.2rem; border-bottom: 1px solid rgba(124,58,237,0.2); } .nav-links.open { display: flex; } .nav-toggle { display: block; } .grid2 { grid-template-columns: 1fr; gap: 2rem; } .ft { grid-template-columns: 1fr; gap: 2rem; } .fb2 { flex-direction: column; text-align: center; } }
+
+    /* PHOTO PLACEHOLDER */
+    .photo-placeholder { background: rgba(124,58,237,0.12); border: 2px dashed rgba(124,58,237,0.3); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; padding: 4rem 2rem; text-align: center; min-height: 380px; }
+    .photo-placeholder .ico { font-size: 3rem; opacity: 0.35; }
+    .photo-placeholder p { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(196,181,253,0.35); }
+
+    /* CERT CARDS */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+    .cert-card { background: rgba(124,58,237,0.08); border: 1px dashed rgba(124,58,237,0.3); border-radius: 16px; padding: 1.8rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .cert-card .cert-ico { font-size: 1.8rem; opacity: 0.5; }
+    .cert-card h4 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 400; color: var(--lavender); }
+    .cert-card p { font-size: 0.82rem; color: rgba(196,181,253,0.5); font-weight: 300; font-style: italic; }
+
+    /* FAITH SECTION */
+    .faith-block { background: radial-gradient(ellipse at center, rgba(124,58,237,0.2) 0%, transparent 65%), rgba(49,46,129,0.3); border: 1px solid rgba(124,58,237,0.25); border-radius: 24px; padding: 4rem; text-align: center; }
+    .faith-block blockquote { font-family: 'Fraunces', serif; font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-weight: 300; font-style: italic; color: var(--white); line-height: 1.5; margin-bottom: 1rem; }
+    .faith-block cite { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--violet); font-style: normal; }
+    .faith-block p { margin-top: 1.5rem; font-size: 0.97rem; font-weight: 300; color: var(--periwinkle); line-height: 1.85; max-width: 560px; margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body>
+<nav role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo-wrap" aria-label="All Things Abound home">
+    <img src="logo.png" alt="All Things Abound logo" class="nav-logo-img" />
+    <span class="nav-logo-text">All Things Abound</span>
+  </a>
+  <button class="nav-toggle" id="nt" aria-controls="nm" aria-expanded="false" aria-label="Open navigation menu">&#9776;</button>
+  <ul class="nav-links" id="nm" role="list">
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html" aria-current="page">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+  <header class="page-header">
+    <span class="lbl">About</span>
+    <h1>The story behind <em>the work.</em></h1>
+    <p>Built by a solopreneur who needed the tools that didn&rsquo;t exist yet &mdash; and decided to build them.</p>
+  </header>
+
+  <!-- MY STORY -->
+  <section class="sec">
+    <div class="inner">
+      <div class="grid2">
+        <div class="photo-placeholder fu">
+          <div class="ico">&#128247;</div>
+          <p>Your photo goes here</p>
+        </div>
+        <div class="fu">
+          <span class="lbl">My Story</span>
+          <h2 class="sh">[Your name] &mdash; <em>[Your headline or role]</em></h2>
+          <p class="sb">[Paragraph 1: Who you are, where you started, what brought you to this work. Write in first person, plainspoken and honest. 3&ndash;4 sentences.]</p>
+          <p class="sb" style="margin-top:1rem;">[Paragraph 2: What you experienced as a solopreneur that led you to build All Things Abound. The gap you saw, the need you felt. 3&ndash;4 sentences.]</p>
+          <p class="sb" style="margin-top:1rem;">[Paragraph 3: Where you are now and what drives you. Optional: personal detail that makes you human and relatable.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAITH FOUNDATION -->
+  <section class="sec sec-alt">
+    <div class="inner">
+      <div class="inner-n fu" style="margin:0 auto;">
+        <span class="lbl">Faith Foundation</span>
+        <h2 class="sh">Where the <em>hope comes from</em></h2>
+        <div class="faith-block">
+          <blockquote>&ldquo;And God is able to bless you abundantly, so that in all things at all times, having all that you need, you will abound in every good work.&rdquo;</blockquote>
+          <cite>2 Corinthians 9:8</cite>
+          <p>[2&ndash;3 sentences about what this verse means to you personally and how it shapes the way you run All Things Abound. Be authentic &mdash; this is not a theological treatise, just your honest foundation.]</p>
+        </div>
+        <p class="sb" style="margin-top:2rem;">[Optional follow-up paragraph: how you hold faith openly without making people feel excluded. The &ldquo;judgment-free&rdquo; piece in your own words.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="sec">
+    <div class="inner">
+      <span class="lbl">Credentials</span>
+      <h2 class="sh fu">Training, certifications, <em>&amp; experience</em></h2>
+      <p class="sb fu" style="max-width:560px;">[One sentence about your professional background and why your credentials matter for the people you serve.]</p>
+      <div class="cert-grid">
+        <div class="cert-card fu">
+          <div class="cert-ico">&#127891;</div>
+          <h4>[Certification or Degree Name]</h4>
+          <p>[Issuing institution] &mdash; [Year]</p>
+        </div>
+        <div class="cert-card fu">
+          <div class="cert-ico">&#127891;</div>
+          <h4>[Certification or Training Name]</h4>
+          <p>[Issuing institution] &mdash; [Year]</p>
+        </div>
+        <div class="cert-card fu">
+          <div class="cert-ico">&#127891;</div>
+          <h4>[Certification or Training Name]</h4>
+          <p>[Issuing institution] &mdash; [Year]</p>
+        </div>
+        <div class="cert-card fu">
+          <div class="cert-ico">&#10010;&#65039;</div>
+          <h4>[Add more as needed]</h4>
+          <p>Placeholder &mdash; replace with real credentials</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES SNAPSHOT -->
+  <section class="sec sec-sap">
+    <div class="inner-n fu" style="text-align:center;">
+      <span class="lbl">What I Believe</span>
+      <h2 class="sh">Grace over grind. <em>Always.</em></h2>
+      <p class="sb" style="max-width:520px;margin:0 auto 2rem;">You don&rsquo;t need to earn your way to enough. You already are enough. Everything I build comes from that belief.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="services.html" class="btn-p">See Services &amp; Pricing</a>
+        <a href="contact.html" class="btn-g">Work With Me</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <span class="lbl">Let&rsquo;s Connect</span>
+    <h2>Ready to work with someone who <em>gets it?</em></h2>
+    <p>Reach out and let&rsquo;s talk about where you are and what you need.</p>
+    <a href="contact.html" class="btn-w">Work With Me</a>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="ft">
+    <div>
+      <div class="fl"><img src="logo.png" alt="All Things Abound" /><span class="fb">All Things Abound</span></div>
+      <p style="font-family:'Fraunces',serif;font-size:.9rem;font-style:italic;color:rgba(196,181,253,.6);font-weight:300;margin-bottom:.3rem;">Abound in every good work.</p>
+      <p class="fv">2 Corinthians 9:8</p>
+    </div>
+    <div class="fn"><p class="fch">Pages</p><ul>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Work With Me</a></li>
+    </ul></div>
+    <div class="fn"><p class="fch">Legal</p><ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="accessibility.html">Accessibility</a></li>
+    </ul></div>
+    <div class="fn"><p class="fch">Connect</p><ul>
+      <li><a href="mailto:hello@allthingsabound.com">Email Us</a></li>
+    </ul></div>
+  </div>
+  <div class="fb2">
+    <p>&copy; <span id="yr"></span> All Things Abound. All rights reserved.</p>
+    <div class="fll"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="accessibility.html">Accessibility</a></div>
+  </div>
+</footer>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const t = document.getElementById('nt'), m = document.getElementById('nm');
+  if (t && m) { t.addEventListener('click', () => { const o = m.classList.toggle('open'); t.setAttribute('aria-expanded', o); }); }
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }), { threshold: 0.1 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
