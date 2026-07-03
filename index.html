@@ -28,6 +28,9 @@
     .nav-cta { background: var(--violet); color: var(--white) !important; padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.2s !important; }
     .nav-cta:hover { background: #6d28d9 !important; }
     .nav-toggle { display: none; background: none; border: none; color: var(--lavender); font-size: 1.4rem; cursor: pointer; padding: 0.25rem; }
+    .nav-has-dropdown { position: relative; }
+    .nav-has-dropdown:hover .nav-dropdown { display: block !important; }
+    .nav-dropdown a:hover { color: var(--white) !important; background: rgba(124,58,237,0.15); }
 
     /* PAGE HEADER (interior pages) */
     .page-header { padding: 9rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.22) 0%, transparent 60%), var(--midnight); border-bottom: 1px solid rgba(124,58,237,0.15); }
@@ -123,6 +126,8 @@
       .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(30,27,75,0.98); padding: 1.5rem 5%; gap: 1.2rem; border-bottom: 1px solid rgba(124,58,237,0.2); }
       .nav-links.open { display: flex; }
       .nav-toggle { display: block; }
+      .nav-dropdown { display: flex !important; position: static !important; background: none !important; border: none !important; padding: 0 0 0 1rem !important; flex-direction: column; gap: 0.6rem; min-width: unset !important; backdrop-filter: none !important; }
+      .nav-dropdown a { padding: 0 !important; font-size: 0.75rem !important; color: rgba(196,181,253,0.55) !important; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
@@ -147,11 +152,16 @@
     </a>
     <button class="nav-toggle" id="navToggle" aria-controls="navMenu" aria-expanded="false" aria-label="Open navigation menu">&#9776;</button>
     <ul class="nav-links" id="navMenu" role="list">
-      <li><a href="mission.html">Mission</a></li>
-      <li><a href="story.html">Our Story</a></li>
-      <li><a href="values.html">Values</a></li>
-      <li><a href="tools.html">Tools</a></li>
-      <li><a href="tools.html#contact" class="nav-cta">Get Started</a></li>
+      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li style="position:relative;" class="nav-has-dropdown"><a href="about.html">About</a>
+        <ul style="display:none;position:absolute;top:calc(100% + 0.5rem);left:0;background:rgba(20,17,65,0.98);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:0.6rem 0;min-width:160px;list-style:none;backdrop-filter:blur(16px);" class="nav-dropdown">
+          <li><a href="about.html#mission" style="display:block;padding:0.5rem 1.3rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--lavender);text-decoration:none;">Mission</a></li>
+          <li><a href="about.html#our-story" style="display:block;padding:0.5rem 1.3rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--lavender);text-decoration:none;">Our Story</a></li>
+          <li><a href="about.html#values" style="display:block;padding:0.5rem 1.3rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--lavender);text-decoration:none;">Values</a></li>
+        </ul>
+      </li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
     </ul>
   </nav>
 
@@ -164,8 +174,8 @@
       <h1 class="hero-tagline">Abound in <em>every</em> good work.</h1>
       <p class="hero-sub">Tools, resources, and encouragement for faith-driven entrepreneurs building something that lasts.</p>
       <div class="btn-group" style="justify-content:center;">
-        <a href="tools.html" class="btn-primary">Explore the Tools</a>
-        <a href="story.html" class="btn-ghost">Our Story</a>
+        <a href="services.html" class="btn-primary">Explore Services</a>
+        <a href="about.html" class="btn-ghost">Our Story</a>
       </div>
     </section>
 
@@ -187,22 +197,22 @@
           <div class="teaser-card t1 fade-up">
             <h3>Our Mission</h3>
             <p>To equip faith-driven entrepreneurs with the tools and encouragement to build businesses rooted in purpose.</p>
-            <a href="mission.html" class="teaser-link">Read Our Mission &rarr;</a>
+            <a href="about.html#mission" class="teaser-link">Read Our Mission &rarr;</a>
           </div>
           <div class="teaser-card t2 fade-up">
             <h3>Our Story</h3>
             <p>Built by solopreneurs, for solopreneurs. Learn where All Things Abound started and why it exists.</p>
-            <a href="story.html" class="teaser-link">Read Our Story &rarr;</a>
+            <a href="about.html#our-story" class="teaser-link">Read Our Story &rarr;</a>
           </div>
           <div class="teaser-card t3 fade-up">
             <h3>Core Values</h3>
             <p>Grace over grind. Abundance mindset. Equipped, not overwhelmed. See the principles that guide everything.</p>
-            <a href="values.html" class="teaser-link">Explore Our Values &rarr;</a>
+            <a href="about.html#values" class="teaser-link">Explore Our Values &rarr;</a>
           </div>
           <div class="teaser-card t4 fade-up">
             <h3>Our Tools</h3>
             <p>Guided assessments, planning frameworks, and social media support &mdash; practical tools for your next step.</p>
-            <a href="tools.html" class="teaser-link">See the Tools &rarr;</a>
+            <a href="services.html" class="teaser-link">See Our Services &rarr;</a>
           </div>
         </div>
       </div>
@@ -214,7 +224,7 @@
         <span class="section-label">The Promise</span>
         <h2 class="section-heading" id="promise-heading" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">&ldquo;You don&rsquo;t need everything figured out to start &mdash; <em>just the next step.</em>&rdquo;</h2>
         <p class="section-body" style="margin:1.2rem auto 2.5rem; max-width:480px;">Whatever season you&rsquo;re in, there&rsquo;s room here to grow.</p>
-        <a href="tools.html" class="btn-primary">Take the Next Step</a>
+        <a href="services.html" class="btn-primary">Take the Next Step</a>
       </div>
     </section>
 
@@ -240,10 +250,10 @@
       <div class="footer-nav-col">
         <p class="footer-col-heading">Pages</p>
         <ul>
-          <li><a href="mission.html">Mission</a></li>
-          <li><a href="story.html">Our Story</a></li>
-          <li><a href="values.html">Values</a></li>
-          <li><a href="tools.html">Tools</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-nav-col">
