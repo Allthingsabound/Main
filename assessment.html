@@ -171,8 +171,8 @@
 </head>
 <body>
   <header class="site-topbar">
-    <a href="index.html" class="tb-logo"><img src="logo.png" alt="All Things Abound" /><span>All Things Abound</span></a>
-    <a href="services.html" class="tb-back">← Back to site</a>
+    <a href="/" class="tb-logo"><img src="logo.png" alt="All Things Abound" /><span>All Things Abound</span></a>
+    <a href="/services" class="tb-back">← Back to site</a>
   </header>
 
   <div id="app"></div>
@@ -180,11 +180,11 @@
   <script>
   // ── IMPORTANT: replace with your real Gumroad product link ──────────────────
   // In the Gumroad dashboard, set "Redirect to a URL after purchase" to:
-  //   https://allthingsabound.com/assessment.html?unlocked=true
+  //   https://allthingsabound.com/assessment?unlocked=true
   // The buy link below MUST stay in the same tab (no target="_blank") so the
   // sessionStorage results survive the round-trip through checkout.
-  var GUMROAD_URL = "https://bsky10.gumroad.com/l/xsvyxb";
-  var TERMS_URL = "terms.html";
+  var GUMROAD_URL = "https://allthingsabound.gumroad.com/l/xsvyxb";
+  var TERMS_URL = "/terms";
 
   // ── Category data ──────────────────────────────────────────────────────────
   var CATS = {
