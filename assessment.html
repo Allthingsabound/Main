@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrepreneurial Path Assessment - All Things Abound</title>
+  <meta name="description" content="A free 5-minute assessment that reveals your top 3 best-fit business paths — grounded in faith and built with purpose." />
+  <link rel="icon" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="jspdf.umd.min.js" defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --indigo: #1E1B4B; --sapphire: #312E81; --violet: #7C3AED;
+      --lav: #C4B5FD; --peri: #C7D2FE; --blush: #FBE9F3;
+      --topbar-h: 56px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFC; color: #1B1B2F; line-height: 1.6; }
+
+    /* ── Slim top bar (site integration) ─────────────────────────── */
+    .site-topbar { position: fixed; top: 0; left: 0; right: 0; height: var(--topbar-h); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(30,27,75,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(124,58,237,0.22); }
+    .tb-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .tb-logo img { height: 30px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .tb-logo span { font-family: 'Fraunces', serif; font-size: 0.82rem; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; }
+    .tb-back { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lav); text-decoration: none; transition: color 0.2s; }
+    .tb-back:hover { color: #fff; }
+    @media (max-width: 560px) { .tb-logo span { display: none; } }
+
+    #app { padding-top: var(--topbar-h); }
+    .fade { animation: fadeIn 0.28s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Intro ───────────────────────────────────────────────────── */
+    .intro { min-height: calc(100vh - var(--topbar-h)); background: linear-gradient(160deg, var(--indigo) 0%, var(--sapphire) 65%, #251f5e 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; position: relative; overflow: hidden; }
+    .intro-glow { position: absolute; top: 4%; left: 50%; transform: translateX(-50%); width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%); pointer-events: none; }
+    .intro-inner { position: relative; max-width: 580px; width: 100%; text-align: center; }
+    .brandmark { margin-bottom: 22px; display: flex; justify-content: center; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.13); border-radius: 40px; padding: 7px 18px; margin-bottom: 26px; font-size: 12px; font-weight: 600; color: var(--lav); letter-spacing: 0.08em; text-transform: uppercase; }
+    .intro-h1 { font-family: 'Fraunces', serif; font-size: clamp(34px, 7vw, 56px); font-weight: 500; color: #fff; line-height: 1.12; margin-bottom: 20px; }
+    .intro-h1-em { display: block; font-style: italic; font-weight: 500; background: linear-gradient(90deg, var(--lav), var(--peri)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .intro-sub { font-size: clamp(15px, 2.5vw, 17px); color: #D7D6F0; line-height: 1.7; margin-bottom: 16px; }
+    .intro-sub strong { color: var(--lav); }
+    .intro-verse { font-size: 13.5px; color: var(--peri); font-style: italic; margin-bottom: 32px; font-family: 'Fraunces', serif; }
+    .intro-feats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+    .feat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 20px; padding: 6px 14px; font-size: 12.5px; color: #C7C6E8; }
+    .intro-cta { background: linear-gradient(135deg, var(--violet), var(--sapphire)); color: #fff; border: none; border-radius: 12px; padding: 17px 46px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; box-shadow: 0 8px 32px rgba(124,58,237,0.33); letter-spacing: 0.01em; transition: transform 0.2s; }
+    .intro-cta:hover { transform: translateY(-2px); }
+    .intro-note { margin-top: 16px; font-size: 13px; color: #9492C4; }
+
+    /* ── Quiz ────────────────────────────────────────────────────── */
+    .quiz { min-height: calc(100vh - var(--topbar-h)); background: #FAFAFC; display: flex; flex-direction: column; }
+    .quiz-header { background: #fff; border-bottom: 1px solid #F0EFFA; padding: 16px 20px 14px; position: sticky; top: var(--topbar-h); z-index: 10; }
+    .quiz-header-inner { max-width: 640px; margin: 0 auto; }
+    .quiz-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .qcount { font-size: 12.5px; font-weight: 700; color: var(--sapphire); letter-spacing: 0.06em; text-transform: uppercase; }
+    .qback { background: none; border: none; cursor: pointer; font-size: 13px; color: #9CA3AF; font-family: 'Inter', sans-serif; }
+    .qback:hover { color: var(--violet); }
+    .progress { position: relative; height: 6px; background: #EEEDFB; border-radius: 6px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--violet), var(--lav)); border-radius: 6px; transition: width 0.4s ease; }
+    .progress-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 2.5px solid var(--violet); transition: left 0.4s ease; }
+    .quiz-body { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 36px 20px 40px; }
+    .quiz-body-inner { max-width: 640px; width: 100%; }
+    .q-head { margin-bottom: 28px; }
+    .q-note { display: inline-flex; align-items: center; gap: 6px; background: var(--blush); border: 1px solid rgba(196,181,253,0.4); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--sapphire); font-weight: 600; margin-bottom: 12px; }
+    .q-text { font-family: 'Fraunces', serif; font-size: clamp(22px, 4vw, 30px); font-weight: 500; color: #1B1B3A; line-height: 1.3; }
+    .q-options { display: flex; flex-direction: column; gap: 10px; }
+    .opt { background: #fff; border: 2px solid #E9E8F5; border-radius: 12px; padding: 16px 20px; text-align: left; cursor: pointer; font-size: 15px; color: #374151; font-weight: 500; font-family: 'Inter', sans-serif; line-height: 1.5; display: flex; align-items: center; gap: 14px; transition: border-color 0.15s, background 0.15s; }
+    .opt:hover { border-color: var(--lav); }
+    .opt.sel { background: rgba(124,58,237,0.05); border-color: var(--violet); color: var(--indigo); font-weight: 600; box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+    .opt-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #D1D5DB; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .opt.sel .opt-radio { border-color: var(--violet); background: var(--violet); }
+    .opt-dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+
+    /* ── Results ─────────────────────────────────────────────────── */
+    .results { min-height: calc(100vh - var(--topbar-h)); background: #FAFAFC; }
+    .results-hero { background: linear-gradient(160deg, var(--indigo) 0%, var(--sapphire) 100%); padding: 40px 20px 50px; text-align: center; position: relative; overflow: hidden; }
+    .results-hero-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%); pointer-events: none; }
+    .results-hero-inner { position: relative; max-width: 600px; margin: 0 auto; }
+    .results-h1 { font-family: 'Fraunces', serif; font-size: clamp(26px, 6vw, 40px); font-weight: 500; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+    .results-sub { font-size: 15px; color: #C7C6E8; margin-bottom: 16px; line-height: 1.6; }
+    .age-note { background: rgba(255,255,255,0.05); border: 1px solid rgba(196,181,253,0.2); border-radius: 14px; padding: 14px 18px; margin: 0 auto 16px; text-align: left; max-width: 480px; font-size: 13px; color: #D7D6F0; line-height: 1.6; }
+    .top3-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .top3-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 30px; padding: 8px 18px; font-size: 13.5px; font-weight: 600; color: #E9E8F5; }
+    .results-body { max-width: 640px; margin: 0 auto; padding: 32px 16px 30px; }
+    .results-hint { font-size: 14px; color: #9CA3AF; text-align: center; margin-bottom: 20px; }
+
+    .rank { display: flex; align-items: center; gap: 12px; }
+    .rank-num { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--violet); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--violet); flex-shrink: 0; }
+    .rank-num.dark { border-color: rgba(255,255,255,0.33); color: #fff; }
+    .rank-label { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9CA3AF; }
+    .rank-label.dark { color: rgba(255,255,255,0.6); }
+
+    /* Full result card */
+    .frc { border-radius: 18px; border: 2px solid #E5E7EB; background: #fff; margin-bottom: 16px; overflow: hidden; transition: all 0.3s; }
+    .frc-head { width: 100%; border: none; cursor: pointer; padding: 18px 20px; display: flex; align-items: center; gap: 14px; text-align: left; transition: background 0.3s; }
+    .frc-titles { flex: 1; }
+    .frc-name { font-size: 18px; font-weight: 600; font-family: 'Fraunces', serif; }
+    .frc-tag { font-size: 13px; margin-top: 2px; }
+    .frc-chev { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #E5E7EB; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: transform 0.3s; flex-shrink: 0; }
+    .frc-body { padding: 24px 20px; }
+    .frc-fits { border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; }
+    .frc-fits p { font-size: 14px; line-height: 1.65; color: #1F2937; }
+    .frc-block { margin-bottom: 20px; }
+    .sl-title { font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--sapphire); margin-bottom: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: #F3F4F6; border-radius: 20px; padding: 5px 12px; font-size: 13px; color: #374151; font-weight: 500; }
+    .frc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .stat { background: #F9FAFB; border-radius: 12px; padding: 12px 14px; }
+    .stat-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 6px; }
+    .stat-val { font-size: 14px; font-weight: 700; color: #1F2937; }
+    .dm { display: flex; align-items: center; gap: 8px; }
+    .dm-bars { display: flex; gap: 4px; }
+    .dm-bar { width: 20px; height: 8px; border-radius: 4px; }
+    .dm-label { font-size: 12px; font-weight: 600; }
+    .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+    .step-num { min-width: 24px; height: 24px; border-radius: 50%; background: var(--indigo); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 700; flex-shrink: 0; font-family: 'Fraunces', serif; }
+    .step-text { font-size: 13.5px; line-height: 1.6; color: #374151; }
+    .sl { margin-bottom: 18px; }
+    .sl-items { display: flex; flex-direction: column; gap: 6px; }
+    .sl-row { display: flex; gap: 8px; align-items: flex-start; }
+    .sl-dot { color: var(--violet); font-size: 13px; margin-top: 1px; }
+    .sl-text { font-size: 13.5px; line-height: 1.6; color: #374151; }
+    .days { display: flex; flex-direction: column; gap: 8px; }
+    .day { background: #F9FAFB; border-radius: 10px; padding: 10px 14px; display: flex; gap: 10px; }
+    .day-week { font-size: 12px; font-weight: 700; min-width: 56px; font-family: 'Fraunces', serif; }
+    .day-text { font-size: 13px; color: #374151; line-height: 1.5; }
+
+    .affirm { background: var(--blush); border: 1px solid rgba(196,181,253,0.33); border-radius: 16px; padding: 22px; margin-bottom: 24px; text-align: center; }
+    .affirm h3 { font-size: 17px; font-weight: 600; color: var(--indigo); font-family: 'Fraunces', serif; margin-bottom: 8px; }
+    .affirm p { font-size: 14px; line-height: 1.7; color: #4C3D63; }
+
+    /* Locked card */
+    .lc { border-radius: 18px; border: 2px solid rgba(124,58,237,0.2); background: #fff; margin-bottom: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.03); }
+    .lc-head { padding: 18px 20px; display: flex; align-items: center; gap: 14px; }
+    .lc-blurwrap { position: relative; }
+    .lc-blur { padding: 20px; filter: blur(5px); user-select: none; pointer-events: none; opacity: 0.5; }
+    .lc-accent { border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
+    .lc-line { height: 12px; border-radius: 6px; margin-bottom: 8px; }
+    .lc-row { display: flex; gap: 10px; margin-bottom: 8px; }
+    .lc-dot2 { width: 22px; height: 22px; border-radius: 50%; background: #E5E7EB; }
+    .lc-bar { flex: 1; height: 12px; background: #E5E7EB; border-radius: 6px; }
+    .lc-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.93) 35%, #fff 100%); }
+    .lc-overlay-inner { text-align: center; padding: 0 20px 20px; }
+    .lc-overlay-inner svg { margin-bottom: 10px; }
+    .lc-title { font-size: 15px; font-weight: 600; color: #1B1B2F; font-family: 'Fraunces', serif; margin-bottom: 8px; }
+    .lc-desc { font-size: 13px; color: #6B7280; line-height: 1.6; }
+
+    /* Unlock CTA */
+    .unlock { background: linear-gradient(135deg, var(--indigo), var(--sapphire)); border-radius: 22px; padding: 32px 24px; text-align: center; margin-bottom: 24px; box-shadow: 0 8px 40px rgba(49,46,129,0.27); }
+    .unlock h2 { font-family: 'Fraunces', serif; font-size: 23px; font-weight: 500; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+    .unlock > p { font-size: 14px; color: #C7C6E8; line-height: 1.7; margin-bottom: 20px; }
+    .unlock-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; text-align: left; }
+    .unlock-item { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 10px 14px; font-size: 14px; color: #D7D6F0; font-weight: 500; }
+    .unlock-price { margin-bottom: 18px; }
+    .price { font-size: 30px; font-weight: 700; color: var(--lav); font-family: 'Fraunces', serif; }
+    .price-note { font-size: 13px; color: #9492C4; margin-left: 6px; }
+    .unlock-btn { display: block; background: linear-gradient(135deg, var(--violet), var(--lav)); color: #fff; text-decoration: none; border-radius: 12px; padding: 17px 32px; font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif; box-shadow: 0 8px 32px rgba(124,58,237,0.33); margin-bottom: 10px; transition: transform 0.2s; }
+    .unlock-btn:hover { transform: translateY(-2px); }
+    .unlock-fine { font-size: 12px; color: #9492C4; }
+
+    .pdf-wrap { text-align: center; margin-bottom: 26px; }
+    .pdf-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--sapphire)); color: #fff; border: none; border-radius: 12px; padding: 15px 32px; font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; box-shadow: 0 6px 24px rgba(124,58,237,0.3); transition: transform 0.2s; }
+    .pdf-btn:hover { transform: translateY(-2px); }
+    .pdf-note { margin-top: 8px; font-size: 12px; color: #9CA3AF; }
+    .retake-wrap { text-align: center; margin-bottom: 8px; }
+    .retake { background: none; border: 2px solid #E9E8F5; border-radius: 12px; padding: 12px 28px; font-size: 14px; color: #6B7280; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; transition: border-color 0.2s, color 0.2s; }
+    .retake:hover { border-color: var(--lav); color: var(--indigo); }
+
+    .disclaimer { max-width: 640px; margin: 0 auto; padding: 0 16px 40px; text-align: center; }
+    .disclaimer p { font-size: 11.5px; color: #9CA3AF; line-height: 1.6; }
+    .disclaimer a { color: var(--violet); text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header class="site-topbar">
+    <a href="/" class="tb-logo"><img src="logo.png" alt="All Things Abound" /><span>All Things Abound</span></a>
+    <a href="/services" class="tb-back">← Back to site</a>
+  </header>
+
+  <div id="app"></div>
+
+  <script>
+  // Purchase link for the full-results unlock. The buy link must stay in the
+  // same tab so saved results survive the round-trip through checkout.
+  var GUMROAD_URL = "https://allthingsabound.gumroad.com/l/xsvyxb";
+  var TERMS_URL = "/terms";
+
+  // ── Category data ──────────────────────────────────────────────────────────
+  var CATS = {
+    ONL: {
+      name: "Online Service Provider",
+      tagline: "Deliver your skills remotely — from anywhere.",
+      color: "#1D4ED8", accent: "#DBEAFE",
+      fitsBest: "Great for self-motivated communicators who want to work from home using a skill they already have. Ideal if you're organized, reliable, and comfortable using the internet.",
+      examples: ["Virtual Assistant", "Freelance Writer/Editor", "Social Media Manager", "Online Bookkeeper", "Customer Service Specialist", "Email Marketing Manager"],
+      difficulty: 2, weeklyTime: "10–20 hrs/week",
+      launchPlan: [
+        "Pick ONE specific service based on a skill you already have — be specific, not \"I'll do anything\"",
+        "Write a simple one-paragraph description of your service and who it's for",
+        "Set up a profile on Fiverr or Upwork using that description as your bio",
+        "Create 2–3 sample pieces of work (even unpaid) to show as proof of skill",
+        "Set your starting price using the pricing guide below",
+        "Message 10 people in your personal network about your new offering",
+        "Apply to 5 relevant job posts per day on your chosen platform for 2 weeks",
+        "Ask your first client for a written testimonial the moment work is done"
+      ],
+      findClients: ["Fiverr and Upwork — best for cold-start visibility with no existing audience", "Facebook groups for small business owners — search \"[your city] small business owners\"", "LinkedIn — post about your service and ask connections to share", "Local Chamber of Commerce Facebook groups"],
+      charge: ["Entry-level: $15–$25/hour or $50–$150 per project", "As your portfolio grows: $25–$50/hour", "Avoid pricing too low — it attracts clients who don't value the work"],
+      tools: ["Google Workspace (free) — documents, email, scheduling", "Canva (free) — visual deliverables", "Calendly (free tier) — client booking", "Wave or Google Sheets (free) — invoicing and tracking"],
+      mistakes: ["Trying to offer too many services instead of ONE clear specialty", "Undercharging out of fear, then struggling to raise prices later", "Not asking for testimonials early, when clients are most excited", "Waiting for a \"perfect\" portfolio before reaching out to anyone"],
+      first30: [
+        { week: "Week 1", text: "Define your service, write your bio, set up your profile" },
+        { week: "Week 2", text: "Create sample work, reach out to your personal network" },
+        { week: "Week 3", text: "Apply daily on freelance platforms, follow up on leads" },
+        { week: "Week 4", text: "Land your first paying client, deliver, request a testimonial" }
+      ]
+    },
+    LOC: {
+      name: "Local Service Business",
+      tagline: "Serve your community and get paid doing it.",
+      color: "#047857", accent: "#D1FAE5",
+      fitsBest: "Perfect for people-oriented, reliable individuals who want to stay in their community. Great if you prefer face-to-face work and flexible hours over sitting at a computer.",
+      examples: ["House Cleaning/Organization", "Lawn Care & Landscaping", "Childcare/Babysitting", "Personal Chef/Meal Prep", "Errand/Grocery Service", "Pet Sitting/Dog Walking"],
+      difficulty: 2, weeklyTime: "10–25 hrs/week",
+      launchPlan: [
+        "Choose ONE local service based on a skill or interest you already have",
+        "Decide your service area — which neighborhoods or zip codes you'll serve",
+        "Set a simple, clear price list based on local research",
+        "Create a simple flyer or post with your service, area, and contact info",
+        "Post in 3 local Facebook groups and on Nextdoor this week",
+        "Offer your first job at a friendly rate to a neighbor to build a testimonial",
+        "Ask every satisfied customer for a referral to one other person",
+        "Set up a simple way to track bookings (shared calendar or notebook)"
+      ],
+      findClients: ["Nextdoor — the single best platform for hyper-local services", "Facebook neighborhood/community groups", "Local bulletin boards — grocery stores, churches, community centers", "Word of mouth from happy customers"],
+      charge: ["Entry-level: $20–$35/hour for most home/local services", "Specialized services (overnight pet sitting, deep cleaning): $40–$75 per job", "Quote flat project rates when possible — easier for customers to say yes to"],
+      tools: ["Google Calendar (free) — scheduling", "Venmo or Cash App (free) — fast payment collection", "Canva (free) — simple flyers and price lists", "Google Sheets (free) — tracking customers and income"],
+      mistakes: ["Trying to serve too wide an area before building a local reputation", "Not confirming bookings in writing — leads to no-shows and confusion", "Underpricing to \"get started,\" attracting bargain-hunters instead of loyal customers", "Not asking for referrals — your best leads come from happy customers"],
+      first30: [
+        { week: "Week 1", text: "Choose your service, set prices, create your flyer/post" },
+        { week: "Week 2", text: "Post in local groups, tell your personal network" },
+        { week: "Week 3", text: "Complete your first 2–3 jobs, ask for reviews/referrals" },
+        { week: "Week 4", text: "Refine pricing and service area based on what you learned" }
+      ]
+    },
+    CRE: {
+      name: "Creative / Content Business",
+      tagline: "Turn your creativity into a cash-flowing brand.",
+      color: "#B45309", accent: "#FEF3C7",
+      fitsBest: "Ideal for expressive, imaginative people who love making things. Best if you have passion for a topic or craft and are willing to be patient while your audience grows.",
+      examples: ["YouTube Channel/Podcast", "Photography/Videography", "Graphic Design", "Etsy Shop for Handmade Goods", "Blogging/Newsletter Writing", "Music Lessons/Performances"],
+      difficulty: 2, weeklyTime: "5–15 hrs/week",
+      launchPlan: [
+        "Choose the ONE creative medium you enjoy most",
+        "Pick a specific niche or theme — broad content is harder to grow than focused content",
+        "Set up one free platform account (YouTube, Instagram, Etsy, or a blog)",
+        "Create and publish your first 3 pieces of content or products",
+        "Post consistently on a simple schedule (e.g. 2x/week) for 30 days",
+        "Engage genuinely with others in your niche — comment, share, build relationships",
+        "Add a simple way for people to pay you (Etsy listing, Ko-fi, Venmo)",
+        "Review what's working after 30 days and double down on it"
+      ],
+      findClients: ["Instagram and TikTok — best for visual/creative niches with fast discovery", "Etsy — best if selling a physical or digital creative product", "Pinterest — strong for evergreen traffic to blogs, designs, or products", "Local art/maker markets — great for in-person sales and feedback"],
+      charge: ["Digital products/prints: $5–$40 depending on complexity", "Commissioned creative work: $50–$300+ depending on medium and time", "Sponsored content/collaborations (once you have an audience): $50–$500+ per post"],
+      tools: ["Canva (free) — graphics, social posts, simple designs", "CapCut (free) — video editing", "Etsy (low listing fees) — selling digital or physical products", "Linktree (free) — one link for all your platforms"],
+      mistakes: ["Trying to post on every platform at once instead of mastering one first", "Waiting for \"perfect\" before publishing anything", "Not having any way for people to actually pay you", "Comparing your beginning to someone else's years of progress"],
+      first30: [
+        { week: "Week 1", text: "Choose your niche and platform, set up your profile" },
+        { week: "Week 2", text: "Create and publish your first pieces of content/products" },
+        { week: "Week 3", text: "Post consistently, engage with your niche community" },
+        { week: "Week 4", text: "Add a payment option, review your results, plan month 2" }
+      ]
+    },
+    PRD: {
+      name: "Product / Reselling Business",
+      tagline: "Source smart, sell well, scale up.",
+      color: "#6D28D9", accent: "#EDE9FE",
+      fitsBest: "Great for organized, business-minded people who enjoy finding deals or creating physical goods. Good for those who want a scalable, systems-driven income.",
+      examples: ["Reselling on eBay/Amazon/Poshmark", "Dropshipping", "Print-on-Demand", "Handmade Products", "Wholesale Buying & Reselling", "Thrift Flipping"],
+      difficulty: 3, weeklyTime: "10–20 hrs/week",
+      launchPlan: [
+        "Choose ONE category to start with — don't try to sell everything",
+        "Research what similar items currently sell for using completed listings on eBay",
+        "Source your first 10–15 items — start with things you already own or thrift finds",
+        "Take clear, well-lit photos of each item",
+        "List your items on 1–2 platforms (Facebook Marketplace + eBay is strong)",
+        "Price items competitively based on your research, not guesswork",
+        "Reinvest your first profits into your next round of inventory",
+        "Track every sale and expense so you know your real profit margin"
+      ],
+      findClients: ["Facebook Marketplace — fastest for local, no-shipping sales", "eBay — best for reaching buyers nationwide", "Poshmark — strong specifically for clothing and accessories", "Local buy/sell/trade Facebook groups"],
+      charge: ["Price 10–20% below similar \"sold\" listings to move inventory faster", "Factor in platform fees (10–15% typical) when setting your price", "Bundle smaller items together to increase average order value"],
+      tools: ["eBay/Marketplace apps (free) — listing and selling", "A simple notebook or Google Sheet (free) — tracking cost vs. sale price", "Good natural lighting + your phone camera", "A scale (if shipping) — accurate shipping cost calculation"],
+      mistakes: ["Buying inventory before confirming it actually sells in your market", "Pricing based on what you paid instead of what buyers will pay", "Not factoring platform and shipping fees into profit calculations", "Letting unsold inventory pile up instead of discounting to keep cash moving"],
+      first30: [
+        { week: "Week 1", text: "Choose your category, research pricing, source your first batch" },
+        { week: "Week 2", text: "Photograph and list everything across 1–2 platforms" },
+        { week: "Week 3", text: "Manage sales, ship/deliver, request reviews" },
+        { week: "Week 4", text: "Reinvest profits, source your next round, refine pricing" }
+      ]
+    },
+    CON: {
+      name: "Consulting / Coaching",
+      tagline: "Your experience is your product. Start selling it.",
+      color: "#BE123C", accent: "#FFE4E6",
+      fitsBest: "Perfect for experienced professionals, natural teachers, and people who love helping others succeed. You need proven knowledge in your area and the confidence to share it.",
+      examples: ["Business Coach/Startup Mentor", "Life/Mindset Coach", "Career Coach/Resume Specialist", "Financial/Budget Coach", "Marketing/Brand Consultant", "Parenting/Relationship Coach"],
+      difficulty: 3, weeklyTime: "10–15 hrs/week",
+      launchPlan: [
+        "Define your specific niche: WHO you help, WHAT problem you solve, WHAT result they get",
+        "Write a simple one-sentence description of your offer",
+        "Offer 3 free 30-minute sessions to people in your target audience",
+        "Ask each free client for a written testimonial and honest feedback",
+        "Turn your free offer into a simple paid package",
+        "Set up a free booking tool so people can schedule with you easily",
+        "Share your offer on social media and in relevant community groups",
+        "Ask every client for a referral once they've seen results"
+      ],
+      findClients: ["LinkedIn — strongest for professional/business coaching niches", "Facebook groups in your niche — find groups your ideal client belongs to", "Instagram — share tips related to your niche to attract followers organically", "Referrals from your free sessions — your best source of paid clients"],
+      charge: ["Single session: $50–$150 depending on niche and experience", "Short package (3–4 sessions): $200–$600", "Prices can increase significantly as you build testimonials and results"],
+      tools: ["Zoom (free tier) — video calls", "Calendly (free tier) — client booking", "Google Docs (free) — session notes and client materials", "PayPal or Stripe (free to set up) — collecting payment"],
+      mistakes: ["Trying to help \"everyone\" instead of a specific, clearly defined client", "Undercharging out of fear, then struggling to raise prices later", "Not asking for testimonials while clients are most excited about results", "Overpreparing instead of starting with real clients and learning as you go"],
+      first30: [
+        { week: "Week 1", text: "Define your niche and offer, create your one-sentence pitch" },
+        { week: "Week 2", text: "Book and complete your 3 free sessions" },
+        { week: "Week 3", text: "Collect testimonials, create your simple paid package" },
+        { week: "Week 4", text: "Share your offer publicly, book your first paying client" }
+      ]
+    },
+    TEC: {
+      name: "Tech / Digital Business",
+      tagline: "Build digital solutions. Create lasting income.",
+      color: "#0369A1", accent: "#E0F2FE",
+      fitsBest: "Best for tech-savvy, problem-solving individuals who enjoy building systems or creating digital products. Higher learning curve — but some of the highest earning potential available.",
+      examples: ["Web Design/Development", "App/Software Development", "SEO/Digital Marketing Agency", "AI Tools/Automation Services", "Online Courses/Digital Products", "IT Support & Managed Services"],
+      difficulty: 4, weeklyTime: "20+ hrs/week",
+      launchPlan: [
+        "Choose ONE specific service or product type",
+        "Build one complete project as a portfolio piece — even unpaid, for a friend or nonprofit",
+        "Create simple profiles on 1–2 platforms showcasing this project",
+        "Join 2 active online communities in your niche (Reddit, Discord, Facebook)",
+        "Apply to 5 relevant freelance jobs per week on your chosen platform",
+        "Land and complete your first paying project, even at a lower rate",
+        "Ask for a testimonial and use it to raise your next client's price",
+        "Reinvest early income into tools or courses that increase your skill level"
+      ],
+      findClients: ["Upwork/Toptal — structured platforms for landing tech freelance work", "LinkedIn — direct outreach to small businesses needing your service", "Local small business Facebook groups", "Referrals from your first few clients"],
+      charge: ["Entry-level project rates: $300–$1,500 depending on scope", "Hourly (once established): $25–$75/hour", "Rates can climb significantly as your portfolio grows"],
+      tools: ["GitHub (free) — code storage and portfolio", "Free-tier hosting (Netlify, Vercel) — deploying projects", "Notion or Trello (free) — project management with clients", "Stripe or PayPal (free to set up) — invoicing and payment"],
+      mistakes: ["Trying to learn everything before starting instead of building one real project", "Underpricing technical work — value the skill, not just the hours", "Not setting clear project scope upfront, leading to endless free revisions", "Skipping a written agreement, even a simple one, before starting paid work"],
+      first30: [
+        { week: "Week 1", text: "Choose your focus, start building your portfolio project" },
+        { week: "Week 2", text: "Finish your project, set up your platform profiles" },
+        { week: "Week 3", text: "Apply to freelance jobs daily, join niche communities" },
+        { week: "Week 4", text: "Land your first paying client, deliver, request a testimonial" }
+      ]
+    },
+    HND: {
+      name: "Hands-on / Trade Business",
+      tagline: "Real skills. Real demand. Real income.",
+      color: "#92400E", accent: "#FEF3C7",
+      fitsBest: "Great for people who love physical work, are skilled with tools, or enjoy solving tangible problems. These businesses stay in high demand and often pay very well.",
+      examples: ["Pressure Washing", "Handyman/Home Repair", "Interior/Exterior Painting", "Custom Carpentry/Woodworking", "Auto Detailing/Basic Repair", "Plumbing/Electrical/HVAC (licensed)"],
+      difficulty: 3, weeklyTime: "20–40 hrs/week",
+      launchPlan: [
+        "Identify your strongest trade skill and the tools you already own",
+        "Research your local licensing requirements (electrical, plumbing, HVAC)",
+        "Set simple, clear pricing based on local competitor research",
+        "Take before/after photos of any practice or initial jobs",
+        "Offer your first job at a discounted rate to a neighbor or friend",
+        "Post your before/after photos in local Facebook groups and Nextdoor",
+        "Ask every satisfied customer for a review and a referral",
+        "Reinvest early income into better tools or required certifications"
+      ],
+      findClients: ["Nextdoor and local Facebook groups", "Google Business Profile (free) — helps you show up in local searches", "Yard signs or vehicle magnets — simple, low-cost local visibility", "Word of mouth and referrals — trade work spreads fast locally"],
+      charge: ["Entry-level: $40–$75/hour or flat project rates based on scope", "Specialized/licensed trades: $75–$150+/hour", "Always price materials separately from labor to stay profitable"],
+      tools: ["Your existing tools — start with what you have, upgrade as you earn", "Google Business Profile (free) — local visibility", "Venmo/Cash App or Square (low fee) — fast payment collection", "A simple notebook or app — tracking jobs, materials, income"],
+      mistakes: ["Skipping licensing requirements for regulated trades", "Underpricing labor because \"it didn't take that long\"", "Not documenting before/after photos — your best marketing tool", "Taking on jobs outside your skill level before you're ready"],
+      first30: [
+        { week: "Week 1", text: "Confirm licensing needs, set pricing, prep your tools" },
+        { week: "Week 2", text: "Complete 1–2 discounted jobs for neighbors/friends, document results" },
+        { week: "Week 3", text: "Post your results locally, start taking paid jobs" },
+        { week: "Week 4", text: "Collect reviews, raise prices slightly, plan your next month" }
+      ]
+    },
+    MIN: {
+      name: "Ministry / Community Business",
+      tagline: "Lead with purpose. Build something that lasts.",
+      color: "#5B21B6", accent: "#EDE9FE",
+      fitsBest: "Ideal for compassionate, mission-driven individuals deeply connected to their community or faith. You don't need much money — you need heart, vision, and commitment.",
+      examples: ["Tutoring/After-School Program", "Community Food Pantry/Co-op", "Faith-Based Coaching/Counseling", "Nonprofit/Community Outreach Org", "Event Planning for Church/Community", "Youth Mentorship Program"],
+      difficulty: 2, weeklyTime: "5–20 hrs/week",
+      launchPlan: [
+        "Identify the ONE specific need in your community that breaks your heart",
+        "Research if anyone locally is already meeting this need, and how you could add value",
+        "Connect with 3 potential partners (churches, schools, community centers)",
+        "Define a simple first offering — one event, one class, or one service",
+        "Set a date and promote it through your partners and personal network",
+        "Run your first event/service and gather honest feedback",
+        "Look into small local grants or community funding if you want to grow",
+        "Build a simple way for people to stay connected (email list, group chat)"
+      ],
+      findClients: ["Local churches and faith communities — natural partners", "Community centers and schools — often looking for outside programs", "Facebook community groups — promote events and gather interest", "Word of mouth through your existing network"],
+      charge: ["Many ministry/community offerings start as free or donation-based", "Paid programs (tutoring, classes): $10–$40 per session is common", "Grants and partnerships can fund larger initiatives without charging individuals"],
+      tools: ["Facebook Events (free) — promoting gatherings", "Eventbrite (free tier) — registration for larger events", "Canva (free) — flyers and promotional materials", "Google Forms (free) — gathering feedback and sign-ups"],
+      mistakes: ["Trying to serve too many needs at once instead of starting with one clear focus", "Not partnering with existing local organizations who already have trust and reach", "Underestimating the planning time needed for in-person events", "Not measuring impact, making it hard to apply for funding or grow later"],
+      first30: [
+        { week: "Week 1", text: "Define your focus, identify potential partners" },
+        { week: "Week 2", text: "Connect with partners, plan your first offering" },
+        { week: "Week 3", text: "Promote and host your first event/service" },
+        { week: "Week 4", text: "Gather feedback, plan your next offering, explore funding options" }
+      ]
+    }
+  };
+
+  // ── Age-tailored notes ──────────────────────────────────────────────────────
+  var AGE_NOTES = {
+    teen: "Since you're under 18, you'll likely need a parent or guardian to help with things like opening a business bank account or signing contracts — but plenty of successful entrepreneurs started exactly at your age. Use this season to build skills and a portfolio.",
+    young_adult: "This stage of life often comes with fewer fixed financial obligations — which can make it a great time to take a calculated risk most people can't afford later.",
+    adult: "You may be balancing this with a full-time job, family, or other commitments — many people in your stage build their business gradually on nights and weekends before going all-in.",
+    mid_adult: "You likely bring real-world experience and a professional network that younger entrepreneurs don't have yet — that's a major advantage worth leaning into.",
+    senior: "Experience is your biggest asset at this stage — many of the highest-earning consultants and coaches are 50+. Age is never a barrier; some of the most successful founders started in this decade of life."
+  };
+
+  // ── Questions ────────────────────────────────────────────────────────────────
+  var QUESTIONS = [
+    { id: "age", text: "What is your age range?", note: "Used to add a tailored note to your results — never to limit your options.", type: "info", options: [{ text: "Under 18", value: "teen" }, { text: "18–24", value: "young_adult" }, { text: "25–34", value: "adult" }, { text: "35–49", value: "mid_adult" }, { text: "50+", value: "senior" }] },
+    { id: "interests", text: "Which area BEST describes your deepest interests or passions?", type: "score", options: [{ text: "Technology, computers, or data", value: "tech", scores: { TEC: 3, ONL: 1 } }, { text: "Arts, design, music, or creativity", value: "arts", scores: { CRE: 3, ONL: 1 } }, { text: "Health, fitness, or wellness", value: "health", scores: { LOC: 2, CON: 2, HND: 1 } }, { text: "Teaching, mentoring, or helping people grow", value: "teaching", scores: { CON: 3, MIN: 2 } }, { text: "Building, fixing, or working with your hands", value: "building", scores: { HND: 3, LOC: 1 } }, { text: "Business, money, and entrepreneurship itself", value: "business", scores: { PRD: 2, CON: 1, TEC: 1 } }, { text: "Faith, community, or social impact", value: "faith", scores: { MIN: 3, CON: 1 } }, { text: "Writing, storytelling, or content creation", value: "writing", scores: { CRE: 2, ONL: 2 } }, { text: "Fashion, beauty, or personal care", value: "fashion", scores: { LOC: 2, CRE: 2 } }, { text: "Food, cooking, or hospitality", value: "food", scores: { HND: 2, LOC: 2 } }] },
+    { id: "skill", text: "How would you describe your skill level in that area?", type: "score", options: [{ text: "Beginner — I'm just starting out", value: "beginner", scores: { PRD: 1, MIN: 1, CRE: 1 } }, { text: "Intermediate — I know a fair amount", value: "intermediate", scores: { ONL: 1, LOC: 1, CRE: 1 } }, { text: "Advanced — I'm quite good at what I do", value: "advanced", scores: { CON: 2, TEC: 1, LOC: 1 } }, { text: "Expert — I have deep knowledge and experience", value: "expert", scores: { CON: 3, TEC: 2, HND: 1 } }] },
+    { id: "time", text: "How many hours per week can you realistically dedicate to building a new venture?", type: "score", options: [{ text: "Less than 5 hours", value: "tiny", scores: { PRD: 1, CRE: 1 } }, { text: "5–10 hours", value: "small", scores: { ONL: 1, CRE: 1, MIN: 1 } }, { text: "10–20 hours", value: "medium", scores: { LOC: 1, CON: 1, HND: 1, ONL: 1 } }, { text: "20+ hours — I'm ready to go all in", value: "large", scores: { TEC: 2, HND: 2, LOC: 1 } }] },
+    { id: "experience", text: "Which best describes your professional background or strongest experience area?", type: "score", options: [{ text: "Corporate / Office work", value: "corporate", scores: { CON: 2, ONL: 2 } }, { text: "Trades / Manual labor / Technical", value: "trades", scores: { HND: 3, LOC: 1 } }, { text: "Creative / Arts / Media", value: "creative", scores: { CRE: 3, ONL: 1 } }, { text: "Technology / IT / Software", value: "tech", scores: { TEC: 3, ONL: 1 } }, { text: "Sales / Marketing / Business", value: "sales", scores: { PRD: 2, CON: 1, ONL: 1 } }, { text: "Teaching / Training / Coaching", value: "teaching", scores: { CON: 3, MIN: 1 } }, { text: "Community / Nonprofit / Ministry", value: "ministry", scores: { MIN: 3, CON: 1 } }, { text: "No specific background yet — I'm starting fresh", value: "none", scores: { PRD: 1, CRE: 1, MIN: 1 } }] },
+    { id: "tech", text: "How comfortable are you with technology — computers, apps, online tools?", type: "score", options: [{ text: "Not comfortable — I keep things simple and basic", value: "low", scores: { HND: 2, LOC: 2, MIN: 1 } }, { text: "Somewhat — I can figure things out when I need to", value: "medium_low", scores: { PRD: 1, LOC: 1, CRE: 1 } }, { text: "Comfortable — I use tech tools regularly", value: "medium", scores: { ONL: 2, PRD: 1, CRE: 1 } }, { text: "Very comfortable — I love technology", value: "high", scores: { TEC: 3, ONL: 2 } }] },
+    { id: "social", text: "How would you describe your social comfort level and communication style?", type: "score", options: [{ text: "I prefer to work alone with minimal interaction", value: "introvert", scores: { CRE: 2, TEC: 2, PRD: 1 } }, { text: "Some interaction is fine, but not too much", value: "ambivert_low", scores: { ONL: 2, PRD: 1, CRE: 1 } }, { text: "I enjoy meeting and working with people regularly", value: "ambivert_high", scores: { LOC: 2, CON: 1, MIN: 1 } }, { text: "I love connecting, networking, and building relationships", value: "extrovert", scores: { CON: 2, MIN: 2, LOC: 1 } }] },
+    { id: "physical", text: "How do you feel about physical or hands-on work?", type: "score", options: [{ text: "I prefer screen-based or desk work", value: "no_physical", scores: { ONL: 2, TEC: 2, CRE: 1 } }, { text: "A little physical activity is fine", value: "light", scores: { PRD: 1, LOC: 1, MIN: 1 } }, { text: "I enjoy a healthy mix of both", value: "mixed", scores: { LOC: 2, CRE: 1, HND: 1 } }, { text: "I thrive with physical, hands-on work", value: "loves_physical", scores: { HND: 3, LOC: 2 } }] },
+    { id: "budget", text: "What is your realistic starting budget for your new venture?", type: "score", options: [{ text: "$0–$100 — I need to start nearly free", value: "zero", scores: { CRE: 2, ONL: 2, MIN: 1 } }, { text: "$100–$500 — I can make a small investment", value: "small", scores: { PRD: 1, ONL: 1, CON: 1 } }, { text: "$500–$2,000 — I'm willing to invest moderately", value: "medium", scores: { LOC: 2, PRD: 2, TEC: 1 } }, { text: "$2,000+ — I'm ready to invest significantly", value: "large", scores: { HND: 2, LOC: 1, PRD: 2 } }] },
+    { id: "income", text: "What is your primary income goal for this venture?", type: "score", options: [{ text: "Supplemental / hobby income (under $500/mo)", value: "hobby", scores: { CRE: 2, MIN: 2 } }, { text: "Side income — $500 to $1,500/month", value: "side", scores: { ONL: 2, PRD: 2, LOC: 1 } }, { text: "Solid part-time income — $2,000 to $5,000/month", value: "part_time", scores: { CON: 2, LOC: 2, HND: 1 } }, { text: "Replace or exceed full-time income — $5,000+/month", value: "full_time", scores: { TEC: 3, CON: 2, HND: 2 } }] },
+    { id: "risk", text: "How do you personally handle financial and business risk?", type: "score", options: [{ text: "Very cautious — I need things to feel stable", value: "very_low", scores: { ONL: 1, PRD: 1, MIN: 1 } }, { text: "Somewhat cautious — I take small, calculated risks", value: "low", scores: { CRE: 1, LOC: 1, CON: 1 } }, { text: "Moderate — I can handle some uncertainty", value: "medium", scores: { LOC: 2, PRD: 1, HND: 1 } }, { text: "Bold — I'm okay with risk when the reward is worth it", value: "high", scores: { TEC: 2, CON: 1, HND: 1 } }] },
+    { id: "location_pref", text: "Where would you prefer to do most of your work?", type: "score", options: [{ text: "From home — my couch, desk, or coffee shop", value: "home", scores: { ONL: 2, TEC: 2, CRE: 2 } }, { text: "A mix of home and out in the world", value: "mixed", scores: { CON: 2, PRD: 1, MIN: 1 } }, { text: "Out in the community — neighborhoods, events, local spaces", value: "community", scores: { MIN: 2, LOC: 2 } }, { text: "At customers' homes or job sites", value: "client_sites", scores: { HND: 3, LOC: 2 } }] },
+    { id: "motivation", text: "What motivates you MOST about starting something of your own?", type: "score", options: [{ text: "Financial freedom and building real wealth", value: "money", scores: { PRD: 2, TEC: 2, CON: 1 } }, { text: "Helping, serving, and making a real difference", value: "helping", scores: { MIN: 2, CON: 2 } }, { text: "Expressing my creativity and passion", value: "creativity", scores: { CRE: 3, ONL: 1 } }, { text: "Being my own boss and controlling my time", value: "freedom", scores: { HND: 1, LOC: 1, ONL: 1, CRE: 1 } }, { text: "Building something meaningful that lasts", value: "legacy", scores: { TEC: 2, MIN: 2, HND: 1 } }] },
+    { id: "client_finding", text: "How would you most naturally find your first customers or clients?", type: "score", options: [{ text: "Social media content and online posting", value: "social", scores: { CRE: 2, ONL: 2 } }, { text: "Word of mouth and personal referrals", value: "word", scores: { MIN: 2, LOC: 2, HND: 1 } }, { text: "Online platforms and marketplaces (Etsy, Fiverr, Amazon, etc.)", value: "platforms", scores: { ONL: 2, PRD: 2, TEC: 1 } }, { text: "Direct outreach, cold calls, or networking events", value: "outreach", scores: { CON: 2, LOC: 1, PRD: 1 } }, { text: "Community events, church, or local organizations", value: "events", scores: { MIN: 3, LOC: 2 } }] },
+    { id: "energize", text: "What kind of work leaves you feeling energized and fulfilled?", type: "score", options: [{ text: "Creating or making something from nothing", value: "making", scores: { CRE: 2, HND: 2, TEC: 1 } }, { text: "Solving problems and building efficient systems", value: "systems", scores: { TEC: 3, CON: 1 } }, { text: "Organizing, buying, or selling things", value: "selling", scores: { PRD: 3, LOC: 1 } }, { text: "Connecting with people and building community", value: "connecting", scores: { MIN: 2, CON: 2, LOC: 1 } }, { text: "Teaching, coaching, or empowering others to grow", value: "teaching", scores: { CON: 3, MIN: 1 } }] },
+    { id: "learning", text: "How do you feel about learning new skills for your business?", type: "score", options: [{ text: "I'd rather work with what I already know", value: "no_learn", scores: { HND: 1, PRD: 1, CON: 1 } }, { text: "I'll learn when I need to, but I prefer practical over theoretical", value: "some_learn", scores: { LOC: 1, MIN: 1, CRE: 1 } }, { text: "I enjoy learning and growing step-by-step", value: "enjoy_learn", scores: { ONL: 2, CON: 2, PRD: 1 } }, { text: "I love learning new things — challenges excite me!", value: "love_learn", scores: { TEC: 3, CRE: 1, CON: 1 } }] },
+    { id: "workstyle", text: "Which work style feels most natural and comfortable to you?", type: "score", options: [{ text: "Independent solo — I work best on my own terms", value: "solo", scores: { CRE: 2, TEC: 1, ONL: 1 } }, { text: "Small focused team — a trusted few working closely together", value: "small_team", scores: { HND: 1, LOC: 1, PRD: 1 } }, { text: "Leader or coordinator — I love directing and organizing others", value: "leader", scores: { CON: 2, MIN: 1, LOC: 1 } }, { text: "Community-centered — I thrive when serving a broader group", value: "community", scores: { MIN: 2, LOC: 1, CON: 1 } }] }
+  ];
+
+  // ── Scoring ───────────────────────────────────────────────────────────────
+  function computeScores(answers) {
+    var scores = { ONL: 0, LOC: 0, CRE: 0, PRD: 0, CON: 0, TEC: 0, HND: 0, MIN: 0 };
+    QUESTIONS.forEach(function (q) {
+      if (q.type !== "score") return;
+      var val = answers[q.id];
+      if (!val) return;
+      var opt = q.options.find(function (o) { return o.value === val; });
+      if (!opt || !opt.scores) return;
+      Object.keys(opt.scores).forEach(function (cat) {
+        scores[cat] = (scores[cat] || 0) + opt.scores[cat];
+      });
+    });
+    return scores;
+  }
+
+  function getTop3(scores) {
+    return Object.keys(scores).map(function (k) { return [k, scores[k]]; })
+      .sort(function (a, b) { return b[1] - a[1]; })
+      .slice(0, 3).map(function (pair) { return pair[0]; });
+  }
+
+  // localStorage (not sessionStorage) so results survive tab closes, checkout
+  // flows that spawn a new tab, and return visits on the same device.
+  function saveState(top3, scores, age) {
+    try {
+      localStorage.setItem("ata_top3", JSON.stringify(top3));
+      localStorage.setItem("ata_scores", JSON.stringify(scores));
+      localStorage.setItem("ata_age", age || "");
+    } catch (e) {}
+  }
+
+  function loadState() {
+    try {
+      var top3 = JSON.parse(localStorage.getItem("ata_top3") || "[]");
+      if (!Array.isArray(top3)) top3 = [];
+      top3 = top3.filter(function (k) { return !!CATS[k]; });
+      return {
+        top3: top3,
+        scores: JSON.parse(localStorage.getItem("ata_scores") || "{}"),
+        age: localStorage.getItem("ata_age") || ""
+      };
+    } catch (e) { return { top3: [], scores: {}, age: "" }; }
+  }
+
+  // Paid once = unlocked on this device, including after a retake.
+  function markPaid() { try { localStorage.setItem("ata_unlocked", "1"); } catch (e) {} }
+  function isPaid() { try { return localStorage.getItem("ata_unlocked") === "1"; } catch (e) { return false; } }
+
+  // ── PDF builder ──────────────────────────────────────────── PDF-BUILDER-START
+  function hexRgb(hex) {
+    var h = hex.replace("#", "");
+    return [parseInt(h.substr(0, 2), 16), parseInt(h.substr(2, 2), 16), parseInt(h.substr(4, 2), 16)];
+  }
+
+  function diffLabelFor(level) { return ["", "Easy", "Easy–Moderate", "Moderate", "Challenging"][level]; }
+
+  function buildResultsPdf(doc, keys, opts) {
+    var M = 54, W = 612, H = 792, CW = W - M * 2, y = 0;
+    var INDIGO = [30, 27, 75], VIOLET = [124, 58, 237], GRAY = [55, 65, 81], LIGHT = [156, 163, 175];
+    var rankLabels = ["Best Match", "Strong Match", "Good Match"], numerals = ["I", "II", "III"];
+
+    function ensure(h) { if (y + h > H - 56) { doc.addPage(); y = M; } }
+    function wrap(text, size, style, color, width) {
+      doc.setFont("helvetica", style || "normal"); doc.setFontSize(size);
+      doc.setTextColor(color[0], color[1], color[2]);
+      return doc.splitTextToSize(text, width || CW);
+    }
+    function para(text, size, style, color, lh, x, width) {
+      var lines = wrap(text, size, style, color, width);
+      lines.forEach(function (ln) { ensure(lh); doc.text(ln, x || M, y); y += lh; });
+    }
+    function label(text) {
+      ensure(30); y += 10;
+      doc.setFont("helvetica", "bold"); doc.setFontSize(9);
+      doc.setTextColor(49, 46, 129);
+      doc.text(text.toUpperCase(), M, y);
+      y += 14;
+    }
+    function bullets(items) {
+      items.forEach(function (it) {
+        var lines = wrap(it, 10.5, "normal", GRAY, CW - 14);
+        ensure(lines.length * 14 + 2);
+        doc.setFillColor(VIOLET[0], VIOLET[1], VIOLET[2]);
+        doc.circle(M + 3, y - 3, 1.5, "F");
+        lines.forEach(function (ln) { doc.text(ln, M + 12, y); y += 14; });
+        y += 2;
+      });
+    }
+
+    // Cover band
+    doc.setFillColor(INDIGO[0], INDIGO[1], INDIGO[2]);
+    doc.rect(0, 0, W, 172, "F");
+    doc.setTextColor(196, 181, 253);
+    doc.setFont("helvetica", "bold"); doc.setFontSize(10);
+    doc.text("A L L   T H I N G S   A B O U N D", W / 2, 52, { align: "center" });
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("times", "normal"); doc.setFontSize(25);
+    doc.text(opts.title, W / 2, 88, { align: "center" });
+    doc.setFont("times", "italic"); doc.setFontSize(12);
+    doc.setTextColor(199, 210, 254);
+    doc.text(opts.subtitle, W / 2, 110, { align: "center" });
+    doc.setFont("helvetica", "italic"); doc.setFontSize(9);
+    doc.setTextColor(148, 146, 196);
+    doc.text("“God is able to make all grace abound to you…” — 2 Corinthians 9:8", W / 2, 136, { align: "center" });
+    doc.setFont("helvetica", "normal");
+    doc.text(opts.dateLine, W / 2, 152, { align: "center" });
+    y = 204;
+
+    if (opts.ageNote) {
+      var noteLines = wrap(opts.ageNote, 10.5, "italic", GRAY, CW - 28);
+      var boxH = noteLines.length * 14 + 20;
+      ensure(boxH + 12);
+      doc.setFillColor(251, 233, 243);
+      doc.roundedRect(M, y - 12, CW, boxH, 8, 8, "F");
+      var ny = y + 6;
+      doc.setFont("helvetica", "italic"); doc.setFontSize(10.5); doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
+      noteLines.forEach(function (ln) { doc.text(ln, M + 14, ny); ny += 14; });
+      y += boxH + 10;
+    }
+
+    keys.forEach(function (key, idx) {
+      var cat = CATS[key];
+      var c = hexRgb(cat.color);
+      ensure(110);
+      y += 8;
+      doc.setFillColor(c[0], c[1], c[2]);
+      doc.roundedRect(M, y - 6, CW, 58, 8, 8, "F");
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold"); doc.setFontSize(9);
+      var tagTop = opts.ranked ? (numerals[idx] + " — " + rankLabels[idx]) : ("Path " + (idx + 1) + " of " + keys.length);
+      doc.text(tagTop.toUpperCase(), M + 16, y + 10);
+      doc.setFont("times", "bold"); doc.setFontSize(17);
+      doc.text(cat.name, M + 16, y + 30);
+      doc.setFont("times", "italic"); doc.setFontSize(10.5);
+      doc.text(cat.tagline, M + 16, y + 45);
+      y += 76;
+
+      label("Who this fits");
+      para(cat.fitsBest, 10.5, "normal", GRAY, 14);
+
+      label("Business ideas");
+      para(cat.examples.join("  •  "), 10.5, "normal", GRAY, 14);
+
+      label("Difficulty & time");
+      para(diffLabelFor(cat.difficulty) + " to start  •  " + cat.weeklyTime, 10.5, "normal", GRAY, 14);
+
+      label("Step-by-step launch plan");
+      cat.launchPlan.forEach(function (step, i) {
+        var lines = wrap((i + 1) + ".  " + step, 10.5, "normal", GRAY, CW - 6);
+        ensure(lines.length * 14 + 2);
+        lines.forEach(function (ln) { doc.text(ln, M + 6, y); y += 14; });
+        y += 2;
+      });
+
+      label("Where to find your first clients"); bullets(cat.findClients);
+      label("What to charge"); bullets(cat.charge);
+      label("Tools you'll actually need"); bullets(cat.tools);
+      label("Common mistakes beginners make"); bullets(cat.mistakes);
+
+      label("Your first 30 days");
+      cat.first30.forEach(function (w) {
+        para(w.week + ": " + w.text, 10.5, "normal", GRAY, 14, M + 6, CW - 6);
+        y += 2;
+      });
+    });
+
+    y += 16;
+    para("This is general guidance, not professional or legal advice. Content includes AI-assisted research. Results and income examples are not guaranteed. Full terms: allthingsabound.com/terms", 8.5, "normal", LIGHT, 12);
+
+    var pages = doc.getNumberOfPages();
+    for (var p = 1; p <= pages; p++) {
+      doc.setPage(p);
+      doc.setFont("helvetica", "normal"); doc.setFontSize(8.5);
+      doc.setTextColor(LIGHT[0], LIGHT[1], LIGHT[2]);
+      doc.text("All Things Abound  •  allthingsabound.com", M, H - 32);
+      doc.text("Page " + p + " of " + pages, W - M, H - 32, { align: "right" });
+    }
+    return doc;
+  }
+  // ── PDF-BUILDER-END ─────────────────────────────────────────────────────────
+
+  function downloadPdf() {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      alert("The PDF tool is still loading — please try again in a few seconds.");
+      return;
+    }
+    var doc = new window.jspdf.jsPDF({ unit: "pt", format: "letter" });
+    buildResultsPdf(doc, state.top3, {
+      title: "Your Entrepreneurial Path Results",
+      subtitle: "Your top 3 best-fit business paths",
+      dateLine: "Prepared " + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+      ageNote: AGE_NOTES[state.age] || "",
+      ranked: true
+    });
+    doc.save("All-Things-Abound-Path-Results.pdf");
+  }
+
+  // ── Small helpers ───────────────────────────────────────────────────────────
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  function brandMark(size, color) {
+    var lines = "";
+    [0, 45, 90, 135, 180, 225, 270, 315].forEach(function (deg) {
+      var r = deg * Math.PI / 180;
+      lines += '<line x1="' + (20 + 9 * Math.cos(r)) + '" y1="' + (20 + 9 * Math.sin(r)) +
+        '" x2="' + (20 + 16 * Math.cos(r)) + '" y2="' + (20 + 16 * Math.sin(r)) +
+        '" stroke="' + color + '" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />';
+    });
+    return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="6" stroke="' + color + '" stroke-width="1.6" />' + lines + '</svg>';
+  }
+
+  function lockIcon() {
+    return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="#7C3AED" stroke-width="1.6"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="#7C3AED" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  }
+
+  function rankBadge(rank, dark) {
+    var numerals = ["I", "II", "III"], labels = ["Best Match", "Strong Match", "Good Match"];
+    return '<div class="rank"><div class="rank-num' + (dark ? " dark" : "") + '">' + numerals[rank] +
+      '</div><span class="rank-label' + (dark ? " dark" : "") + '">' + labels[rank] + '</span></div>';
+  }
+
+  function difficultyMeter(level) {
+    var colors = ["", "#22C55E", "#84CC16", "#F59E0B", "#EF4444"];
+    var labels = ["", "Easy", "Easy–Moderate", "Moderate", "Challenging"];
+    var bars = "";
+    for (var i = 1; i <= 4; i++) {
+      bars += '<div class="dm-bar" style="background:' + (i <= level ? colors[level] : "#E5E7EB") + '"></div>';
+    }
+    return '<div class="dm"><div class="dm-bars">' + bars + '</div><span class="dm-label" style="color:' + colors[level] + '">' + labels[level] + '</span></div>';
+  }
+
+  function sectionList(title, items) {
+    return '<div class="sl"><h4 class="sl-title">' + title + '</h4><div class="sl-items">' +
+      items.map(function (it) { return '<div class="sl-row"><span class="sl-dot">·</span><p class="sl-text">' + esc(it) + '</p></div>'; }).join("") +
+      '</div></div>';
+  }
+
+  // ── Screens ─────────────────────────────────────────────────────────────────
+  function IntroScreen() {
+    var feats = ["Free to take", "8 business categories", "No experience needed", "Faith-driven results"];
+    return '' +
+      '<section class="intro"><div class="intro-glow"></div><div class="intro-inner">' +
+      '<div class="brandmark">' + brandMark(34, "#C4B5FD") + '</div>' +
+      '<div class="pill">Free Assessment · 5 Minutes</div>' +
+      '<h1 class="intro-h1">Discover Your<span class="intro-h1-em">Entrepreneurial Path</span></h1>' +
+      '<p class="intro-sub">Answer <strong>' + QUESTIONS.length + ' simple questions</strong> and discover your top 3 best-fit business paths — grounded in faith and built with purpose.</p>' +
+      '<p class="intro-verse">"God is able to make all grace abound to you, so that having all you need, you\'ll abound in every good work." — 2 Corinthians 9:8</p>' +
+      '<div class="intro-feats">' + feats.map(function (f) { return '<div class="feat">' + f + '</div>'; }).join("") + '</div>' +
+      '<button class="intro-cta" data-action="start">Start My Free Assessment →</button>' +
+      '<p class="intro-note">No sign-up required. 100% free.</p>' +
+      '</div></section>';
+  }
+
+  function QuestionScreen() {
+    var q = QUESTIONS[state.currentQ];
+    var total = QUESTIONS.length;
+    var progress = (state.currentQ / total) * 100;
+    var selected = state.answers[q.id];
+    return '' +
+      '<div class="quiz"><div class="quiz-header"><div class="quiz-header-inner">' +
+      '<div class="quiz-header-row"><span class="qcount">Question ' + (state.currentQ + 1) + ' of ' + total + '</span>' +
+      (state.currentQ > 0 ? '<button class="qback" data-action="back">← Back</button>' : '') +
+      '</div><div class="progress"><div class="progress-fill" style="width:' + progress + '%"></div><div class="progress-dot" style="left:' + progress + '%"></div></div>' +
+      '</div></div>' +
+      '<div class="quiz-body"><div class="quiz-body-inner fade"><div class="q-head">' +
+      (q.note ? '<div class="q-note">' + q.note + '</div>' : '') +
+      '<h2 class="q-text">' + esc(q.text) + '</h2></div>' +
+      '<div class="q-options">' +
+      q.options.map(function (opt) {
+        var isSel = selected === opt.value;
+        return '<button class="opt' + (isSel ? " sel" : "") + '" data-action="answer" data-qid="' + q.id + '" data-value="' + opt.value + '">' +
+          '<span class="opt-radio">' + (isSel ? '<span class="opt-dot"></span>' : '') + '</span>' + esc(opt.text) + '</button>';
+      }).join("") +
+      '</div></div></div></div>';
+  }
+
+  function fullResultCard(catKey, rank, isOpen) {
+    var cat = CATS[catKey];
+    var head = '<button class="frc-head" data-action="toggle" data-idx="' + rank + '" style="background:' + (isOpen ? cat.color : "#FAFAFC") + '">' +
+      rankBadge(rank, isOpen) +
+      '<div class="frc-titles"><div class="frc-name" style="color:' + (isOpen ? "#fff" : "#1B1B2F") + '">' + cat.name + '</div>' +
+      '<div class="frc-tag" style="color:' + (isOpen ? "rgba(255,255,255,0.8)" : "#6B7280") + '">' + cat.tagline + '</div></div>' +
+      '<div class="frc-chev" style="' + (isOpen ? "transform:rotate(180deg);color:#fff;border-color:rgba(255,255,255,0.4)" : "color:#9CA3AF;border-color:#E5E7EB") + '">▾</div></button>';
+    if (!isOpen) return '<div class="frc" style="border-color:#E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,0.04)">' + head + '</div>';
+
+    var body = '<div class="frc-body">' +
+      '<div class="frc-fits" style="background:' + cat.accent + '"><p><strong style="color:' + cat.color + '">Who this fits:</strong> ' + esc(cat.fitsBest) + '</p></div>' +
+      '<div class="frc-block"><h4 class="sl-title">Business Ideas</h4><div class="chips">' +
+      cat.examples.map(function (ex) { return '<span class="chip">' + esc(ex) + '</span>'; }).join("") + '</div></div>' +
+      '<div class="frc-stats"><div class="stat"><div class="stat-label">Startup Difficulty</div>' + difficultyMeter(cat.difficulty) + '</div>' +
+      '<div class="stat"><div class="stat-label">Time Needed</div><div class="stat-val">' + cat.weeklyTime + '</div></div></div>' +
+      '<div class="frc-block"><h4 class="sl-title">Step-by-Step Launch Plan</h4>' +
+      cat.launchPlan.map(function (step, i) { return '<div class="step"><div class="step-num">' + (i + 1) + '</div><p class="step-text">' + esc(step) + '</p></div>'; }).join("") + '</div>' +
+      sectionList("Where to Find Your First Clients", cat.findClients) +
+      sectionList("What to Charge", cat.charge) +
+      sectionList("Tools You'll Actually Need", cat.tools) +
+      sectionList("Common Mistakes Beginners Make", cat.mistakes) +
+      '<div><h4 class="sl-title">Your First 30 Days</h4><div class="days">' +
+      cat.first30.map(function (w) { return '<div class="day"><span class="day-week" style="color:' + cat.color + '">' + w.week + '</span><span class="day-text">' + esc(w.text) + '</span></div>'; }).join("") +
+      '</div></div></div>';
+
+    return '<div class="frc" style="border-color:' + cat.color + ';box-shadow:0 4px 24px ' + cat.color + '22">' + head + body + '</div>';
+  }
+
+  function lockedCard(catKey, rank) {
+    var cat = CATS[catKey];
+    var lines = [90, 75, 60].map(function (w) { return '<div class="lc-line" style="width:' + w + '%;background:' + cat.color + '44"></div>'; }).join("");
+    var rows = "";
+    for (var n = 0; n < 4; n++) rows += '<div class="lc-row"><div class="lc-dot2"></div><div class="lc-bar"></div></div>';
+    return '<div class="lc">' +
+      '<div class="lc-head" style="background:' + cat.color + '">' + rankBadge(rank, true) +
+      '<div class="frc-titles"><div class="frc-name" style="color:#fff">' + cat.name + '</div><div class="frc-tag" style="color:rgba(255,255,255,0.8)">' + cat.tagline + '</div></div></div>' +
+      '<div class="lc-blurwrap"><div class="lc-blur"><div class="lc-accent" style="background:' + cat.accent + '">' + lines + '</div>' + rows + '</div>' +
+      '<div class="lc-overlay"><div class="lc-overlay-inner">' + lockIcon() +
+      '<p class="lc-title">Full breakdown locked</p>' +
+      '<p class="lc-desc">Unlock to see your full step-by-step launch plan, where to find clients, what to charge, tools you\'ll need, common mistakes, and your first 30 days.</p>' +
+      '</div></div></div></div>';
+  }
+
+  function ResultsScreen() {
+    var top3 = state.top3, ageNote = AGE_NOTES[state.age];
+    var gumroad = GUMROAD_URL + (GUMROAD_URL.indexOf("?") >= 0 ? "&" : "?") + "wanted=true";
+    var body;
+
+    if (state.isUnlocked) {
+      body = '<div class="pdf-wrap"><button class="pdf-btn" data-action="pdf">Download Your Results (PDF)</button>' +
+        '<p class="pdf-note">Save a copy — yours to keep, even offline.</p></div>' +
+        '<p class="results-hint">Tap each card to explore your match in detail ↓</p>' +
+        top3.map(function (k, i) { return fullResultCard(k, i, state.openCard === i); }).join("") +
+        '<div class="affirm"><h3>You Have All You Need</h3><p>Every successful entrepreneur started exactly where you are right now. Pick your top match, follow the first 3 steps, and take action this week. You already have what you need to abound in good work.</p></div>';
+    } else {
+      var items = ["Who each path fits and why it matched YOU", "Real business ideas for each of your top 3", "A full step-by-step launch plan — not just generic tips", "Where to find your first clients", "What to actually charge", "Tools you'll need", "Common beginner mistakes to avoid", "Your first 30 days mapped out"];
+      body = top3.map(function (k, i) { return lockedCard(k, i); }).join("") +
+        '<div class="unlock"><h2>Unlock Your Full Breakdown</h2>' +
+        '<p>Get instant access to your complete results — no waiting, no email needed. Unlocks immediately after payment.</p>' +
+        '<div class="unlock-list">' + items.map(function (it) { return '<div class="unlock-item">✓ ' + esc(it) + '</div>'; }).join("") + '</div>' +
+        '<div class="unlock-price"><span class="price">$9</span><span class="price-note">one-time • instant access</span></div>' +
+        '<a class="unlock-btn" href="' + gumroad + '">Unlock My Results Now — $9 →</a>' +
+        '<p class="unlock-fine">Results unlock instantly after payment — right here on this page</p>' +
+        '<p class="unlock-fine" style="margin-top:8px;">Already purchased but seeing this screen? Email <a href="mailto:hello@allthingsabound.com" style="color:#C4B5FD;">hello@allthingsabound.com</a> with your Gumroad receipt.</p></div>';
+    }
+
+    return '<div class="results"><div class="results-hero"><div class="results-hero-glow"></div><div class="results-hero-inner">' +
+      '<div class="brandmark">' + brandMark(28, "#C4B5FD") + '</div>' +
+      '<h1 class="results-h1">' + (state.isUnlocked ? "Your Full Results Are Unlocked" : "Your Results Are In") + '</h1>' +
+      '<p class="results-sub">' + (state.isUnlocked ? "Welcome! Your complete personalized breakdown is ready below." : "Here are your top 3 best-fit entrepreneurial paths. Unlock the full breakdown to see everything.") + '</p>' +
+      (state.isUnlocked && ageNote ? '<div class="age-note">' + esc(ageNote) + '</div>' : '') +
+      '<div class="top3-chips">' + top3.map(function (k) { return '<div class="top3-chip">' + CATS[k].name + '</div>'; }).join("") + '</div>' +
+      '</div></div>' +
+      '<div class="results-body">' + body +
+      '<div class="retake-wrap"><button class="retake" data-action="restart">↺ Retake the Assessment</button></div></div>' +
+      '<div class="disclaimer"><p>This is general guidance, not professional or legal advice. Content includes AI-assisted research. Results and income examples are not guaranteed. ' +
+      '<a href="' + TERMS_URL + '" target="_blank" rel="noopener noreferrer">See full Terms &amp; Privacy Policy</a></p></div></div>';
+  }
+
+  // ── State + controller ──────────────────────────────────────────────────────
+  var state = { screen: "intro", currentQ: 0, answers: {}, top3: [], scores: {}, age: "", isUnlocked: false, openCard: 0 };
+  var app = document.getElementById("app");
+
+  function view() {
+    if (state.screen === "intro") return IntroScreen();
+    if (state.screen === "quiz") return QuestionScreen();
+    return ResultsScreen();
+  }
+
+  function render() { app.innerHTML = view(); }
+
+  function handleAnswer(qId, value) {
+    state.answers[qId] = value;
+    if (state.currentQ < QUESTIONS.length - 1) {
+      state.currentQ += 1;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      var s = computeScores(state.answers);
+      var t3 = getTop3(s);
+      var userAge = state.answers.age || "";
+      state.scores = s; state.top3 = t3; state.age = userAge;
+      state.isUnlocked = isPaid(); state.openCard = 0;
+      saveState(t3, s, userAge);
+      state.screen = "results";
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  function handleBack() {
+    if (state.currentQ > 0) { state.currentQ -= 1; render(); }
+  }
+
+  function handleRestart() {
+    state.screen = "intro"; state.currentQ = 0; state.answers = {};
+    state.top3 = []; state.scores = {}; state.age = ""; state.isUnlocked = false; state.openCard = 0;
+    window.history.replaceState({}, "", window.location.pathname);
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  app.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-action]");
+    if (!btn) return;
+    var action = btn.getAttribute("data-action");
+    if (action === "start") { state.screen = "quiz"; render(); window.scrollTo({ top: 0 }); }
+    else if (action === "back") { handleBack(); }
+    else if (action === "answer") { handleAnswer(btn.getAttribute("data-qid"), btn.getAttribute("data-value")); }
+    else if (action === "toggle") { var idx = parseInt(btn.getAttribute("data-idx"), 10); state.openCard = state.openCard === idx ? -1 : idx; render(); }
+    else if (action === "pdf") { downloadPdf(); }
+    else if (action === "restart") { handleRestart(); }
+  });
+
+  // ── Init: detect return from checkout, restore saved results ───────────────
+  (function init() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("unlocked") === "true") {
+      markPaid();
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+    var saved = loadState();
+    if (isPaid() && saved.top3.length === 3) {
+      state.top3 = saved.top3; state.scores = saved.scores; state.age = saved.age;
+      state.isUnlocked = true; state.screen = "results";
+    }
+    render();
+  })();
+  </script>
+</body>
+</html>
