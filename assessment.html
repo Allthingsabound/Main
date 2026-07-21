@@ -161,6 +161,16 @@
     .unlock-btn:hover { transform: translateY(-2px); }
     .unlock-fine { font-size: 12px; color: #9492C4; }
 
+    .license-box { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12); }
+    .license-label { font-size: 13px; color: #C7C6E8; margin-bottom: 10px; }
+    .license-row { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
+    .license-input { flex: 1; min-width: 0; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 12px 14px; font-size: 13px; color: #fff; font-family: 'Inter', sans-serif; }
+    .license-input::placeholder { color: #9492C4; }
+    .license-input:focus { outline: none; border-color: var(--lav); }
+    .license-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 12px 20px; font-size: 13.5px; font-weight: 600; color: #fff; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; }
+    .license-btn:hover { background: rgba(255,255,255,0.18); }
+    .license-msg { font-size: 12.5px; color: #C4B5FD; margin-top: 10px; min-height: 16px; }
+
     .pdf-wrap { text-align: center; margin-bottom: 26px; }
     .pdf-btn { display: inline-block; background: linear-gradient(135deg, var(--violet), var(--sapphire)); color: #fff; border: none; border-radius: 12px; padding: 15px 32px; font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; box-shadow: 0 6px 24px rgba(124,58,237,0.3); transition: transform 0.2s; }
     .pdf-btn:hover { transform: translateY(-2px); }
@@ -187,6 +197,8 @@
   // same tab so saved results survive the round-trip through checkout.
   var GUMROAD_URL = "https://allthingsabound.gumroad.com/l/xsvyxb";
   var TERMS_URL = "/terms";
+  // Cloudflare Worker that checks a license key against Gumroad's API.
+  var VERIFY_URL = "https://verify-license.purple-math-8954.workers.dev";
 
   // ── Category data ──────────────────────────────────────────────────────────
   var CATS = {
@@ -785,8 +797,12 @@
         '<div class="unlock-list">' + items.map(function (it) { return '<div class="unlock-item">✓ ' + esc(it) + '</div>'; }).join("") + '</div>' +
         '<div class="unlock-price"><span class="price">$9</span><span class="price-note">one-time • instant access</span></div>' +
         '<a class="unlock-btn" href="' + gumroad + '">Unlock My Results Now — $9 →</a>' +
-        '<p class="unlock-fine">Results unlock instantly after payment — right here on this page</p>' +
-        '<p class="unlock-fine" style="margin-top:8px;">Already purchased but seeing this screen? Email <a href="mailto:hello@allthingsabound.com" style="color:#C4B5FD;">hello@allthingsabound.com</a> with your Gumroad receipt.</p></div>';
+        '<p class="unlock-fine">After payment, your Gumroad receipt shows a license key — paste it below to unlock instantly</p>' +
+        '<div class="license-box"><p class="license-label">Already purchased? Paste your license key:</p>' +
+        '<div class="license-row"><input id="license-input" class="license-input" type="text" autocomplete="off" spellcheck="false" placeholder="ABCD1234-EF567890-…" />' +
+        '<button class="license-btn" data-action="verify">Unlock</button></div>' +
+        '<p id="license-msg" class="license-msg"></p>' +
+        '<p class="unlock-fine" style="margin-top:10px;">Can\'t find your key? Email <a href="mailto:hello@allthingsabound.com" style="color:#C4B5FD;">hello@allthingsabound.com</a> with your Gumroad receipt.</p></div>';
     }
 
     return '<div class="results"><div class="results-hero"><div class="results-hero-glow"></div><div class="results-hero-inner">' +
@@ -837,6 +853,31 @@
     if (state.currentQ > 0) { state.currentQ -= 1; render(); }
   }
 
+  function handleVerify() {
+    var input = document.getElementById("license-input");
+    var msg = document.getElementById("license-msg");
+    var key = input ? input.value.trim() : "";
+    if (!key) { if (msg) msg.textContent = "Please paste your license key first."; return; }
+    if (msg) msg.textContent = "Checking your key…";
+    fetch(VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ license_key: key })
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.valid) {
+        markPaid();
+        try { localStorage.setItem("ata_license", key); } catch (e) {}
+        state.isUnlocked = true; state.openCard = 0;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        if (msg) msg.textContent = "That key doesn't look valid. Double-check your Gumroad receipt, or email hello@allthingsabound.com.";
+      }
+    }).catch(function () {
+      if (msg) msg.textContent = "Couldn't reach the verification service — please try again in a moment.";
+    });
+  }
+
   function handleRestart() {
     state.screen = "intro"; state.currentQ = 0; state.answers = {};
     state.top3 = []; state.scores = {}; state.age = ""; state.isUnlocked = false; state.openCard = 0;
@@ -854,22 +895,33 @@
     else if (action === "answer") { handleAnswer(btn.getAttribute("data-qid"), btn.getAttribute("data-value")); }
     else if (action === "toggle") { var idx = parseInt(btn.getAttribute("data-idx"), 10); state.openCard = state.openCard === idx ? -1 : idx; render(); }
     else if (action === "pdf") { downloadPdf(); }
+    else if (action === "verify") { handleVerify(); }
     else if (action === "restart") { handleRestart(); }
   });
 
-  // ── Init: detect return from checkout, restore saved results ───────────────
+  app.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target && e.target.id === "license-input") handleVerify();
+  });
+
+  // ── Init: restore saved results; verify license key if one is in the URL ───
   (function init() {
     var params = new URLSearchParams(window.location.search);
-    if (params.get("unlocked") === "true") {
-      markPaid();
+    // Unlocking requires a license key verified against Gumroad — a bare URL
+    // parameter is never trusted.
+    var urlKey = (params.get("license_key") || "").trim();
+    if (window.location.search) {
       window.history.replaceState({}, "", window.location.pathname);
     }
     var saved = loadState();
-    if (isPaid() && saved.top3.length === 3) {
+    if (saved.top3.length === 3) {
       state.top3 = saved.top3; state.scores = saved.scores; state.age = saved.age;
-      state.isUnlocked = true; state.screen = "results";
+      state.isUnlocked = isPaid(); state.screen = "results";
     }
     render();
+    if (urlKey && state.screen === "results" && !state.isUnlocked) {
+      var input = document.getElementById("license-input");
+      if (input) { input.value = urlKey; handleVerify(); }
+    }
   })();
   </script>
 </body>
