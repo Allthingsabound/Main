@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop - All Things Abound</title>
+  <script src="https://gumroad.com/js/gumroad.js"></script>
   <meta name="description" content="Digital downloads and resources for faith-driven solopreneurs. Templates, workbooks, guides, and more — tools you can use today." />
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
@@ -99,6 +100,9 @@
     .coming-soon-band h3 em { color: var(--lavender); font-style: italic; }
     .coming-soon-band p { font-size: 0.97rem; font-weight: 300; color: var(--periwinkle); max-width: 480px; margin: 0 auto 1.8rem; line-height: 1.8; }
 
+    /* IMAGE FALLBACK */
+    .prod-fallback { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.6rem; width:100%; height:100%; padding:2rem; text-align:center; }
+
     /* NOTIFY FORM */
     .notify-form { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; max-width: 440px; margin: 0 auto; }
     .notify-form input { background: rgba(30,27,75,0.8); border: 1px solid rgba(124,58,237,0.3); border-radius: 50px; color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 300; padding: 0.75rem 1.4rem; flex: 1; min-width: 200px; outline: none; transition: border-color 0.2s; }
@@ -144,75 +148,66 @@
 
       <div class="shop-tabs fu">
         <a href="#digital" class="shop-tab active">All</a>
-        <a href="#digital" class="shop-tab">Templates</a>
-        <a href="#digital" class="shop-tab">Workbooks</a>
-        <a href="#digital" class="shop-tab">Guides</a>
+        <a href="#digital" class="shop-tab">Invitations</a>
+        <a href="#digital" class="shop-tab">Custom Design</a>
       </div>
 
       <div class="product-grid">
 
-        <!-- PRODUCT 1 -->
-        <div class="product-card fu">
-          <div class="product-img">
+        <!-- PRODUCT 1: Mamma Mia Disco Invitation Suite -->
+        <div class="product-card fu" data-category="Invitations">
+          <div class="product-img" style="padding:0; background:var(--sapphire);">
             <span class="product-badge new">New</span>
+            <img
+              src="YOUR-MAMMA-MIA-PREVIEW-IMAGE.jpg"
+              alt="Mamma Mia Disco Party Invitation Suite preview"
+              style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'prod-fallback\'><div class=\'prod-ico\'>&#127881;</div><p class=\'prod-img-label\'>Preview image coming soon</p></div>'"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-type">Canva Template &mdash; Invitation Suite</span>
+            <h3>Mamma Mia Disco Invitation Suite</h3>
+            <p>A fully editable Canva invite suite &mdash; invitation, RSVP page, calendar, playlist page, and outfit inspo. Edit it yourself, or choose the personalized version.</p>
+            <div class="product-footer">
+              <div class="product-price">from $18</div>
+              <a href="https://allthingsabound.gumroad.com/l/mammamiainvite" class="gumroad-button product-btn" target="_blank" rel="noopener">Buy Now &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 2: Custom Invitation Design Service -->
+        <div class="product-card fu" data-category="Custom Design">
+          <div class="product-img" style="padding:0; background:rgba(196,181,253,0.15);">
+            <img
+              src="YOUR-CUSTOM-DESIGN-PREVIEW-IMAGE.jpg"
+              alt="Custom Invitation Design Service preview"
+              style="width:100%; height:100%; object-fit:cover; display:block; border-radius:0;"
+              onerror="this.style.display='none'; this.parentElement.innerHTML+='<div class=\'prod-fallback\'><div class=\'prod-ico\'>&#127912;</div><p class=\'prod-img-label\'>Preview image coming soon</p></div>'"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-type">Done-for-You Service</span>
+            <h3>Custom Invitation Design</h3>
+            <p>Any celebration, any style. Tell us your theme and details and we&rsquo;ll design it from scratch &mdash; ready to print or share digitally.</p>
+            <div class="product-footer">
+              <div class="product-price">$50</div>
+              <a href="YOUR-GUMROAD-CUSTOM-DESIGN-LINK" class="product-btn" target="_blank" rel="noopener">Get Started &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT 3 — placeholder for next product -->
+        <div class="product-card fu" data-category="">
+          <div class="product-img">
+            <span class="product-badge soon">Coming Soon</span>
             <div class="prod-ico">&#128203;</div>
-            <p class="prod-img-label">Product image coming soon</p>
+            <p class="prod-img-label">More templates on the way</p>
           </div>
           <div class="product-body">
-            <span class="product-type">Template</span>
-            <h3>[Product Name &mdash; Placeholder]</h3>
-            <p>[One or two sentences describing what this download includes and what problem it solves for the buyer. Be specific and practical.]</p>
-            <div class="product-footer">
-              <div class="product-price"><span class="price-placeholder">Price TBD</span></div>
-              <button class="product-btn disabled">Coming Soon</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PRODUCT 2 -->
-        <div class="product-card fu">
-          <div class="product-img">
-            <div class="prod-ico">&#128196;</div>
-            <p class="prod-img-label">Product image coming soon</p>
-          </div>
-          <div class="product-body">
-            <span class="product-type">Workbook</span>
-            <h3>[Product Name &mdash; Placeholder]</h3>
-            <p>[One or two sentences describing what this download includes and what problem it solves for the buyer. Be specific and practical.]</p>
-            <div class="product-footer">
-              <div class="product-price"><span class="price-placeholder">Price TBD</span></div>
-              <button class="product-btn disabled">Coming Soon</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PRODUCT 3 -->
-        <div class="product-card fu">
-          <div class="product-img">
-            <div class="prod-ico">&#128218;</div>
-            <p class="prod-img-label">Product image coming soon</p>
-          </div>
-          <div class="product-body">
-            <span class="product-type">Guide</span>
-            <h3>[Product Name &mdash; Placeholder]</h3>
-            <p>[One or two sentences describing what this download includes and what problem it solves for the buyer. Be specific and practical.]</p>
-            <div class="product-footer">
-              <div class="product-price"><span class="price-placeholder">Price TBD</span></div>
-              <button class="product-btn disabled">Coming Soon</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PRODUCT 4 — add more as needed -->
-        <div class="product-card fu">
-          <div class="product-img">
-            <div class="prod-ico">&#128247;</div>
-            <p class="prod-img-label">Product image coming soon</p>
-          </div>
-          <div class="product-body">
-            <span class="product-type">Template</span>
-            <h3>[Product Name &mdash; Placeholder]</h3>
-            <p>[One or two sentences describing what this download includes and what problem it solves for the buyer. Be specific and practical.]</p>
+            <span class="product-type">Template &mdash; Placeholder</span>
+            <h3>[Next Product Name]</h3>
+            <p>[Description coming soon. Drop in product name, description, and Gumroad link when ready.]</p>
             <div class="product-footer">
               <div class="product-price"><span class="price-placeholder">Price TBD</span></div>
               <button class="product-btn disabled">Coming Soon</button>
