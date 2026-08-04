@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <title>Store - All Things Abound</title>
+  <meta name="description" content="Templates, tools, and resources from All Things Abound — made to help your work and your celebrations abound." />
+  <link rel="icon" href="logo.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --midnight: #1E1B4B; --sapphire: #312E81; --violet: #7C3AED;
+      --lavender: #C4B5FD; --periwinkle: #C7D2FE; --blush: #FBE9F3; --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--midnight); color: var(--white); line-height: 1.7; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(30,27,75,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(124,58,237,0.18); }
+    .nav-logo-wrap { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .nav-logo-img { height: 42px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .nav-logo-text { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--lavender); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--white); }
+    .nav-cta { background: var(--violet); color: var(--white) !important; padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #6d28d9 !important; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--lavender); font-size: 1.4rem; cursor: pointer; padding: 0.25rem; }
+    .nav-has-dropdown { position: relative; }
+    .nav-has-dropdown:hover .nav-dropdown { display: block !important; }
+    .nav-dropdown a:hover { color: var(--white) !important; background: rgba(124,58,237,0.15); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 9rem 5% 4rem; text-align: center; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.22) 0%, transparent 60%), var(--midnight); border-bottom: 1px solid rgba(124,58,237,0.15); }
+    .page-header .section-label { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: #fbe9f3; margin-bottom: 1rem; }
+    .page-header h1 { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; color: var(--white); line-height: 1.2; }
+    .page-header h1 em { color: var(--lavender); font-style: italic; }
+    .page-header p { margin-top: 1rem; font-size: 1.05rem; font-weight: 300; color: var(--periwinkle); max-width: 580px; margin-left: auto; margin-right: auto; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { display: block; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: #fbe9f3; margin-bottom: 1rem; }
+    .section-heading { font-family: 'Fraunces', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.25; color: var(--white); margin-bottom: 1.3rem; }
+    .section-heading em { color: var(--lavender); font-style: italic; }
+    .section-body { font-size: 1rem; font-weight: 300; color: var(--periwinkle); line-height: 1.85; }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-block; background: var(--violet); color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: #6d28d9; transform: translateY(-2px); }
+    .btn-white { display: inline-block; background: var(--white); color: var(--violet); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; padding: 1rem 2.6rem; border-radius: 50px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+
+    /* CTA BAND */
+    .cta-band { background: linear-gradient(180deg, var(--midnight) 0%, var(--violet) 50%, #0d0b28 100%); text-align: center; padding: 5.5rem 5%; }
+    .cta-band .section-label { color: #fbe9f3; }
+    .cta-band h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--white); max-width: 600px; margin: 0 auto 1rem; line-height: 1.25; }
+    .cta-band h2 em { font-style: italic; color: rgba(255,255,255,0.85); }
+    .cta-band p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 2.2rem; }
+
+    /* FOOTER */
+    footer { background: #0d0b28; padding: 4rem 5% 2rem; border-top: 1px solid rgba(124,58,237,0.18); }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo-wrap { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+    .footer-logo-img { height: 34px; width: auto; mix-blend-mode: screen; filter: brightness(1.2); }
+    .footer-brand { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); }
+    .footer-tagline { font-family: 'Fraunces', serif; font-size: 0.9rem; font-style: italic; color: rgba(196,181,253,0.6); margin-bottom: 0.3rem; font-weight: 300; }
+    .footer-verse { font-size: 0.75rem; color: rgba(196,181,253,0.35); letter-spacing: 0.14em; }
+    .footer-col-heading { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: #fbe9f3; margin-bottom: 1rem; }
+    .footer-nav-col ul { list-style: none; }
+    .footer-nav-col ul li { margin-bottom: 0.6rem; }
+    .footer-nav-col ul a { font-size: 0.87rem; color: rgba(196,181,253,0.55); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+    .footer-nav-col ul a:hover { color: var(--lavender); }
+    .footer-bottom { border-top: 1px solid rgba(124,58,237,0.12); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.8rem; color: rgba(196,181,253,0.35); }
+    .footer-legal-links { display: flex; gap: 1.5rem; }
+    .footer-legal-links a { font-size: 0.8rem; color: rgba(196,181,253,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-legal-links a:hover { color: var(--lavender); }
+
+    /* FADE IN */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; z-index: 100; background: #1E1B4B; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 1.5rem 5%; gap: 1.2rem; border-bottom: 1px solid rgba(124,58,237,0.2); box-shadow: 0 12px 24px rgba(0,0,0,0.35); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .nav-has-dropdown { text-align: center; }
+      .nav-dropdown { display: flex !important; position: static !important; background: none !important; border: none !important; padding: 0 !important; flex-direction: column; align-items: center; gap: 0.6rem; min-width: unset !important; backdrop-filter: none !important; }
+      .nav-dropdown a { padding: 0 !important; font-size: 0.75rem !important; color: rgba(196,181,253,0.55) !important; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+  <style>
+    /* STORE */
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .product-card { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.22); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, border-color 0.25s; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.5); }
+    .product-cover { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; background: var(--sapphire); }
+    .product-cover-art { width: 100%; aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.45) 0%, transparent 70%), var(--sapphire); }
+    .product-cover-art span { font-family: 'Fraunces', serif; font-size: 3rem; font-style: italic; font-weight: 300; color: var(--lavender); }
+    .product-body { padding: 1.8rem; display: flex; flex-direction: column; flex: 1; }
+    .product-kicker { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #fbe9f3; margin-bottom: 0.6rem; }
+    .product-title { font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 400; color: var(--white); margin-bottom: 0.7rem; line-height: 1.3; }
+    .product-desc { font-size: 0.92rem; font-weight: 300; color: var(--periwinkle); line-height: 1.7; flex: 1; margin-bottom: 1.4rem; }
+    .product-price { font-family: 'Fraunces', serif; font-size: 1.15rem; color: var(--lavender); margin-bottom: 1.2rem; }
+    .product-price small { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(196,181,253,0.6); margin-left: 0.4rem; }
+    .store-note { text-align: center; font-size: 0.82rem; color: rgba(196,181,253,0.45); margin-top: 2.5rem; }
+  </style>
+</head>
+<body>
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo-wrap" aria-label="All Things Abound home">
+      <img src="logo.png" alt="All Things Abound logo" class="nav-logo-img" />
+      <span class="nav-logo-text">All Things Abound</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-controls="navMenu" aria-expanded="false" aria-label="Open navigation menu">&#9776;</button>
+    <ul class="nav-links" id="navMenu" role="list">
+      <li><a href="/">Home</a></li>
+      <li style="position:relative;" class="nav-has-dropdown"><a href="/about">About</a>
+        <ul style="display:none;position:absolute;top:calc(100% + 0.5rem);left:0;background:rgba(20,17,65,0.98);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:0.6rem 0;min-width:160px;list-style:none;backdrop-filter:blur(16px);" class="nav-dropdown">
+          <li><a href="/about#mission" style="display:block;padding:0.5rem 1.3rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--lavender);text-decoration:none;">Mission</a></li>
+          <li><a href="/about#our-story" style="display:block;padding:0.5rem 1.3rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--lavender);text-decoration:none;">Our Story</a></li>
+          <li><a href="/about#values" style="display:block;padding:0.5rem 1.3rem;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--lavender);text-decoration:none;">Values</a></li>
+        </ul>
+      </li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/store" aria-current="page">Store</a></li>
+      <li><a href="/contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-content">
+    <header class="page-header">
+      <span class="section-label">Store</span>
+      <h1>Made to help you <em>abound.</em></h1>
+      <p>Templates, tools, and resources we&rsquo;ve crafted with care &mdash; for your business and your celebrations.</p>
+    </header>
+
+    <section class="section" aria-label="Products">
+      <div class="section-inner">
+        <div class="store-grid">
+
+          <!-- Mamma Mia Invitation Suite -->
+          <article class="product-card fade-up">
+            <img class="product-cover" src="https://public-files.gumroad.com/37cehc7s30wzrze714e5mybj0ptu" alt="Mamma Mia disco-themed birthday invitation preview" />
+            <div class="product-body">
+              <p class="product-kicker">Canva Template Suite</p>
+              <h2 class="product-title">Mamma Mia Disco Party Invitation Suite</h2>
+              <p class="product-desc">Throwing a disco-themed birthday bash? This fully editable Canva suite has everything: the invitation card, RSVP &amp; countdown page, event details with location button, matching calendar, playlist page, and outfit inspiration for your guests. No design experience needed &mdash; or let us personalize it for you.</p>
+              <p class="product-price">From $18<small>DIY $18 &middot; Done-for-you $28</small></p>
+              <a class="btn-primary" href="https://allthingsabound.gumroad.com/l/mammamiainvite" target="_blank" rel="noopener">Get the Template &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Entrepreneurial Path Assessment -->
+          <article class="product-card fade-up">
+            <div class="product-cover-art" role="img" aria-label="Entrepreneurial Path Assessment"><span>Discover your path</span></div>
+            <div class="product-body">
+              <p class="product-kicker">Guided Assessment</p>
+              <h2 class="product-title">Entrepreneurial Path Assessment</h2>
+              <p class="product-desc">Answer 17 simple questions and discover your top 3 best-fit business paths &mdash; grounded in faith and built with purpose. The assessment is free; unlock your full personalized breakdown with launch plans, pricing guides, and a downloadable PDF.</p>
+              <p class="product-price">Free<small>full results $9</small></p>
+              <a class="btn-primary" href="/assessment">Take the Free Assessment &rarr;</a>
+            </div>
+          </article>
+
+        </div>
+        <p class="store-note">Payments are processed securely through Gumroad. More goods are on the way.</p>
+      </div>
+    </section>
+
+    <div class="cta-band" role="complementary" aria-label="Custom design call to action">
+      <span class="section-label">Something Custom?</span>
+      <h2>Want a design made <em>just for you?</em></h2>
+      <p>Any theme, any celebration &mdash; we&rsquo;ll design it, personalize it, and send it ready to share.</p>
+      <a href="mailto:hello@allthingsabound.com" class="btn-white">Request a Custom Design</a>
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="footer-logo-wrap">
+          <img src="logo.png" alt="All Things Abound" class="footer-logo-img" />
+          <span class="footer-brand">All Things Abound</span>
+        </div>
+        <p class="footer-tagline">Abound in every good work.</p>
+        <p class="footer-verse">2 Corinthians 9:8</p>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-col-heading">Pages</p>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/store">Store</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-col-heading">Legal</p>
+        <ul>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/accessibility">Accessibility</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-col-heading">Connect</p>
+        <ul>
+          <li><a href="mailto:hello@allthingsabound.com">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="yr"></span> All Things Abound. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/accessibility">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+    }
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.getElementById('yr') && (document.getElementById('yr').textContent = new Date().getFullYear());
+  </script>
+</body>
+</html>
