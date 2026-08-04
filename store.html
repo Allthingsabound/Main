@@ -99,7 +99,8 @@
   </style>
   <style>
     /* STORE */
-    .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fit, 430px); justify-content: center; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    @media (max-width: 500px) { .store-grid { grid-template-columns: 1fr; } }
     .product-card { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.22); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, border-color 0.25s; }
     .product-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.5); }
     .product-cover { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; background: var(--sapphire); }
@@ -156,18 +157,6 @@
               <p class="product-desc">Throwing a disco-themed birthday bash? This fully editable Canva suite has everything: the invitation card, RSVP &amp; countdown page, event details with location button, matching calendar, playlist page, and outfit inspiration for your guests. No design experience needed &mdash; or let us personalize it for you.</p>
               <p class="product-price">From $18<small>DIY $18 &middot; Done-for-you $28</small></p>
               <a class="btn-primary" href="https://allthingsabound.gumroad.com/l/mammamiainvite" target="_blank" rel="noopener">Get the Template &rarr;</a>
-            </div>
-          </article>
-
-          <!-- Entrepreneurial Path Assessment -->
-          <article class="product-card fade-up">
-            <div class="product-cover-art" role="img" aria-label="Entrepreneurial Path Assessment"><span>Discover your path</span></div>
-            <div class="product-body">
-              <p class="product-kicker">Guided Assessment</p>
-              <h2 class="product-title">Entrepreneurial Path Assessment</h2>
-              <p class="product-desc">Answer 17 simple questions and discover your top 3 best-fit business paths &mdash; grounded in faith and built with purpose. The assessment is free; unlock your full personalized breakdown with launch plans, pricing guides, and a downloadable PDF.</p>
-              <p class="product-price">Free<small>full results $9</small></p>
-              <a class="btn-primary" href="/assessment">Take the Free Assessment &rarr;</a>
             </div>
           </article>
 
